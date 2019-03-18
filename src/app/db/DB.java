@@ -16,6 +16,7 @@ public abstract class DB {
         User result = null;
         PreparedStatement ps = prep("SELECT * FROM users WHERE username = ? AND password = ?");
         try {
+//            TODO: Fix nullPointer that occurs here
             ps.setString(1, username);
             ps.setString(2, password);
             result = (User)new ObjectMapper<>(User.class).mapOne(ps.executeQuery());

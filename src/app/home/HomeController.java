@@ -2,6 +2,7 @@ package app.home;
 
 import app.Main;
 import app.account.AccountController;
+import app.login.LoginController;
 import app.transaction.TransactionController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ public class HomeController {
     void initialize(){
         // load accounts from db using LoginController.user.getId() and display them
 
+        System.out.println("User: "+LoginController.getUser().getId());
     }
 
     @FXML

@@ -11,6 +11,10 @@ public class User {
     @Column("age")
     private int age;
 
+    public long getId(){
+        return id;
+    }
+
     @Override
     public String toString(){
         return String.format("User: { id: %d, name: %s, age: %d }", id, name, age);

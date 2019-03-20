@@ -4,6 +4,7 @@ package app.login;
 import app.Entities.User;
 import app.Main;
 import app.db.DB;
+import app.home.HomeController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,6 +30,7 @@ public class LoginController {
     public static User getUser() {
         return user;
     }
+    public static HomeController homeController;
 
     @FXML
     private void initialize() {
@@ -55,17 +57,16 @@ public class LoginController {
 
     void switchScene(String pathname) {
         try {
-            Parent bla = FXMLLoader.load(getClass().getResource(pathname));
-            Scene scene = new Scene(bla, 600, 400);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(pathname));
+            Parent fxmlHome = loader.load();
+
+            homeController = loader.getController();
+
+            Scene scene = new Scene(fxmlHome, 700, 500);
             Main.stage.setScene(scene);
             Main.stage.show();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-    }
-
-    @FXML
-    void goToHome() {
-        switchScene("/app/home/home.fxml");
     }
 }

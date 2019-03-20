@@ -9,6 +9,8 @@ public class Account {
     @Column("account_nr")
     private long accountNr;
     @Column
+    private String name;
+    @Column
     private String type;
     @Column
     private float saldo;
@@ -17,8 +19,16 @@ public class Account {
         return type;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public float getSaldo() {
         return saldo;
+    }
+
+    public long getAccountNr() {
+        return accountNr;
     }
 
     @Override

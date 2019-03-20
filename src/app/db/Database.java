@@ -1,9 +1,6 @@
 package app.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 
 public class Database {
@@ -29,12 +26,26 @@ public class Database {
         PreparedStatement ps = preparedStatements.get(SQLQuery);
         if (ps == null) {
             try {
-                return conn.prepareStatement(SQLQuery);
+                ps = conn.prepareStatement(SQLQuery);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return ps;
+    }
+
+    public CallableStatement cardPay(long cardNr, long targetAccount, float amount) {
+
+        CallableStatement stmt = null;
+        try {
+            stmt = conn.prepareCall("{call card_pay(?, ?, ?)}");
+            stmt.setLong(1, cardNr);
+            stmt.setLong(2, targetAccount);
+            stmt.setFloat(3, amount);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stmt;
     }
 
     private void connectToDb() {

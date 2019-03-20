@@ -7,12 +7,11 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="150.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="150.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
    <content>
       <VBox prefHeight="398.0" prefWidth="149.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Hem" />
+            <Button fx:id="homeButton" onAction="#loadHome" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Hem" />
             <Accordion prefHeight="394.0" prefWidth="136.0">
                <panes>
                   <TitledPane animated="false" text="Konton och kort">

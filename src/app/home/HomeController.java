@@ -8,6 +8,7 @@ import app.login.LoginController;
 import app.transaction.TransactionController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -26,11 +27,12 @@ public class HomeController {
         System.out.println("initialize home");
 
         loadNavbar();
-
+        loadAllAccounts();
 
         System.out.println(LoginController.getUser());
-
         System.out.println("User: " + LoginController.getUser().getId());
+
+        DB.cardPay(1111222233334444L, 852147483647L, 20.5f);
     }
 
     void loadNavbar() {
@@ -43,7 +45,21 @@ public class HomeController {
         }
         Scene scene = new Scene(fxmlNav);
         homePane.setLeft(scene.getRoot());
+        BorderPane.setAlignment(homePane.getLeft(), Pos.TOP_CENTER);
+    }
 
+    public void loadAllAccounts() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/account/allAccounts.fxml"));
+        Parent fxmlAccounts = null;
+        try {
+            fxmlAccounts = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(fxmlAccounts);
+
+        homePane.setCenter(scene.getRoot());
+        BorderPane.setAlignment(homePane.getCenter(), Pos.TOP_CENTER);
     }
 
     @FXML

@@ -1,6 +1,7 @@
 package app.account;
 
 
+import app.Entities.Account;
 import app.Entities.Transaction;
 import app.db.DB;
 import app.transaction.TransactionController;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -18,11 +20,22 @@ public class AccountController {
 
     @FXML
     VBox transactionBox;
+    @FXML
+    Label accountName;
+    @FXML
+    Label accountNr;
+    @FXML
+    Label accountSaldo;
 
     @FXML
     private void initialize() {
-        System.out.println("initialize account");
-        loadMoreTransactions();
+//        loadMoreTransactions();
+    }
+
+    public void setAccount(Account account) {
+        accountName.setText(account.getName());
+        accountNr.setText("" + account.getAccountNr());
+        accountSaldo.setText("" + account.getSaldo());
     }
 
     void loadMoreTransactions() {

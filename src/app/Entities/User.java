@@ -15,6 +15,8 @@ public class User {
         return id;
     }
 
+    public String getName() { return name; }
+
     @Override
     public String toString(){
         return String.format("User: { id: %d, name: %s, age: %d }", id, name, age);

@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ObjectMapper<T> {
@@ -58,13 +59,20 @@ public class ObjectMapper<T> {
     }
 
     public T mapOne(ResultSet rs) {
+        try {
+            if (!rs.isBeforeFirst())
+                return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return this.map(this.resultSetToHashMap(rs));
     }
-    public List<T> map(ResultSet rs) {
+
+    public List<?> map(ResultSet rs) {
         return this.map(this.resultSetToArrayList(rs));
     }
 
-    public HashMap<String, Object> resultSetToHashMap(ResultSet rs){
+    public HashMap<String, Object> resultSetToHashMap(ResultSet rs) {
         HashMap<String, Object> row = null;
         try {
             ResultSetMetaData md = rs.getMetaData();
@@ -75,12 +83,14 @@ public class ObjectMapper<T> {
                     row.put(md.getColumnName(i), rs.getObject(i));
                 }
             }
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         return row;
     }
 
-    public List resultSetToArrayList(ResultSet rs){
+    public List resultSetToArrayList(ResultSet rs) {
         ArrayList list = new ArrayList(50);
         try {
             ResultSetMetaData md = rs.getMetaData();
@@ -92,7 +102,9 @@ public class ObjectMapper<T> {
                 }
                 list.add(row);
             }
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         return list;
     }

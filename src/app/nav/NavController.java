@@ -1,6 +1,5 @@
 package app.nav;
 
-import app.Entities.Account;
 import app.Entities.CT;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

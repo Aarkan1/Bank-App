@@ -1,12 +1,8 @@
 package app.home;
 
-import app.Entities.Account;
 import app.Entities.CT;
 import app.Main;
-import app.account.AccountController;
-import app.db.DB;
 import app.login.LoginController;
-import app.transaction.TransactionController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -15,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
-import java.util.List;
 
 public class HomeController {
 

@@ -19,6 +19,22 @@ public abstract class DB {
         DBhelper.getDBhelper().moveMoneyBetweenAccounts(from, to, amount);
     }
 
+    public static void createNewAccount(String name, String type) {
+        DBhelper.getDBhelper().createNewAccount(name, type);
+    }
+
+    public static void changeAccountName(long targetAccount, String newName) {
+        DBhelper.getDBhelper().changeAccountName(targetAccount, newName);
+    }
+
+    public static void changeAccountType(long targetAccount, String newType) {
+        DBhelper.getDBhelper().changeAccountType(targetAccount, newType);
+    }
+
+    public static void deleteAccount(long targetAccount) {
+        DBhelper.getDBhelper().deleteAccount(targetAccount);
+    }
+
     public static PreparedStatement prep(String SQLQuery) {
         return Database.getInstance().prepareStatement(SQLQuery);
     }

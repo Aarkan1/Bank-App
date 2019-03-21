@@ -14,6 +14,11 @@ import java.util.List;
  */
 public abstract class DB {
 
+
+    public static void moveMoneyBetweenAccounts(long from, long to, double amount) {
+        DBhelper.getDBhelper().moveMoneyBetweenAccounts(from, to, amount);
+    }
+
     public static PreparedStatement prep(String SQLQuery) {
         return Database.getInstance().prepareStatement(SQLQuery);
     }
@@ -63,7 +68,7 @@ public abstract class DB {
         return result; // return Accounts;
     }
 
-    public static void cardPay(long cardNr, long targetAccount, float amount) {
+    public static void cardPay(long cardNr, long targetAccount, double amount) {
 
         CallableStatement cs = Database.getInstance().cardPay(cardNr, targetAccount, amount);
 

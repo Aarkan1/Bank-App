@@ -13,7 +13,7 @@ public class Account {
     @Column
     private String type;
     @Column
-    private float saldo;
+    private double saldo;
     private int offset = 0;
 
     public int getOffset(){
@@ -32,7 +32,7 @@ public class Account {
         return name;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 

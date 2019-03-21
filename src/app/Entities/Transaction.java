@@ -15,7 +15,7 @@ public class Transaction {
     @Column
     private String message;
     @Column
-    private float amount;
+    private double amount;
     @Column
     private java.sql.Timestamp date;
     @Column("account_from")
@@ -29,7 +29,7 @@ public class Transaction {
         return message;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 

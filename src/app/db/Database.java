@@ -34,14 +34,14 @@ public class Database {
         return ps;
     }
 
-    public CallableStatement cardPay(long cardNr, long targetAccount, float amount) {
+    public CallableStatement cardPay(long cardNr, long targetAccount, double amount) {
 
         CallableStatement stmt = null;
         try {
             stmt = conn.prepareCall("{call card_pay(?, ?, ?)}");
             stmt.setLong(1, cardNr);
             stmt.setLong(2, targetAccount);
-            stmt.setFloat(3, amount);
+            stmt.setDouble(3, amount);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,8 +50,7 @@ public class Database {
 
     public CallableStatement callableStatement(String procedure, String[] params) {
 
-        String param;
-        param = String.join(", ", params);
+        String param = String.join(", ", params);
 
         System.out.println(param);
 

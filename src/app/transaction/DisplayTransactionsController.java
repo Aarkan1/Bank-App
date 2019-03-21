@@ -29,7 +29,7 @@ public class DisplayTransactionsController {
 
     @FXML
     private void initialize() {
-        System.out.println("initialize transaction");
+        System.out.println("initialize transactions");
 
         loadMore.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
             loadMoreTransactions();

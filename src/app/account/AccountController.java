@@ -2,6 +2,7 @@ package app.account;
 
 
 import app.Entities.Account;
+import app.Entities.CT;
 import app.Entities.Transaction;
 import app.db.DB;
 import app.transaction.TransactionController;
@@ -11,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -19,7 +22,7 @@ import java.util.List;
 public class AccountController {
 
     @FXML
-    VBox transactionBox;
+    Pane accountPane;
     @FXML
     Label accountName;
     @FXML
@@ -29,41 +32,32 @@ public class AccountController {
 
     @FXML
     private void initialize() {
-//        loadMoreTransactions();
     }
 
     public void setAccount(Account account) {
         accountName.setText(account.getName());
         accountNr.setText("" + account.getAccountNr());
         accountSaldo.setText("" + account.getSaldo());
+
+        accountPane.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
+            displayTransactions(account);
+
+            System.out.println(account.getName() + " clicked");
+        });
     }
 
-    void loadMoreTransactions() {
-        List<Transaction> transactions = DB.getTransactions(854294967295L);
-
-        for (Transaction transaction : transactions) {
-            displayTransaction(transaction);
-        }
-    }
-
-    void displayTransaction(Transaction transaction) {
-        // For every transaction, do the following:
+    void displayTransactions(Account account) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/transaction/transaction.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/transaction/displayTransactions.fxml"));
             Parent fxmlInstance = loader.load();
             Scene scene = new Scene(fxmlInstance);
 
-            TransactionController controller = loader.getController();
-            controller.setTransaction(transaction);
+            CT.homeController.setCenter(scene);
+            CT.setDisplayTransactionsController(loader.getController());
 
-            transactionBox.getChildren().add(scene.getRoot());
+            CT.displayTransactionsController.loadTransactions(account);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    void clickLoadTransactions(Event e) {
-        loadMoreTransactions();
     }
 }

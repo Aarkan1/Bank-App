@@ -1,6 +1,7 @@
 package app.login;
 
 
+import app.Entities.CT;
 import app.Entities.User;
 import app.Main;
 import app.db.DB;
@@ -30,7 +31,6 @@ public class LoginController {
     public static User getUser() {
         return user;
     }
-    public static HomeController homeController;
 
     @FXML
     private void initialize() {
@@ -60,7 +60,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pathname));
             Parent fxmlHome = loader.load();
 
-            homeController = loader.getController();
+            CT.setHomeController(loader.getController());
 
             Scene scene = new Scene(fxmlHome, 700, 500);
             Main.stage.setScene(scene);

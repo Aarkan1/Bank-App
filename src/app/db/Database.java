@@ -48,6 +48,23 @@ public class Database {
         return stmt;
     }
 
+    public CallableStatement callableStatement(String procedure, String[] params) {
+
+        String param;
+        param = String.join(", ", params);
+
+        System.out.println(param);
+
+        CallableStatement stmt = null;
+        try {
+            stmt = conn.prepareCall("{call " + procedure + "(" + param + ")}");
+//            stmt.setString(1, param);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stmt;
+    }
+
     private void connectToDb() {
         try {
             conn = DriverManager.getConnection(connectionURL);

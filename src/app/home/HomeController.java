@@ -1,6 +1,7 @@
 package app.home;
 
 import app.Entities.Account;
+import app.Entities.CT;
 import app.Main;
 import app.account.AccountController;
 import app.db.DB;
@@ -19,7 +20,7 @@ import java.util.List;
 public class HomeController {
 
     @FXML
-    BorderPane homePane;
+    public BorderPane homePane;
 
     @FXML
     void initialize() {
@@ -32,7 +33,8 @@ public class HomeController {
         System.out.println(LoginController.getUser());
         System.out.println("User: " + LoginController.getUser().getId());
 
-        DB.cardPay(1111222233334444L, 852147483647L, 20.5f);
+//        test for paying with card
+//        DB.cardPay(1111222233334444L, 852147483647L, 20.5f);
     }
 
     void loadNavbar() {
@@ -43,6 +45,9 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        CT.setNavController(loader.getController());
+
         Scene scene = new Scene(fxmlNav);
         homePane.setLeft(scene.getRoot());
         BorderPane.setAlignment(homePane.getLeft(), Pos.TOP_CENTER);
@@ -58,8 +63,15 @@ public class HomeController {
         }
         Scene scene = new Scene(fxmlAccounts);
 
+        CT.setAllAccountController(loader.getController());
+
+        setCenter(scene);
+    }
+
+    public void setCenter(Scene scene) {
         homePane.setCenter(scene.getRoot());
         BorderPane.setAlignment(homePane.getCenter(), Pos.TOP_CENTER);
+
     }
 
     @FXML

@@ -18,6 +18,10 @@ public abstract class DB {
         return Database.getInstance().prepareStatement(SQLQuery);
     }
 
+    public static CallableStatement call(String procedure, String[] params) {
+        return Database.getInstance().callableStatement(procedure, params);
+    }
+
     public static User getMatchingUser(String email, String password) {
         User result = null;
         PreparedStatement ps = prep("SELECT * FROM users WHERE email = ? AND password = ?");
@@ -33,17 +37,13 @@ public abstract class DB {
 
     //        Example method with default parameters
     public static List<Transaction> getTransactions(long accountNr) {
-        return getTransactions(accountNr, 0, 10);
+        return getTransactions(accountNr, 0);
     }
 
     public static List<Transaction> getTransactions(long accountNr, int offset) {
-        return getTransactions(accountNr, offset, offset + 10);
-    }
 
-    public static List<Transaction> getTransactions(long accountNr, int offset, int limit) {
         List<Transaction> result = null;
-        // TODO: Fix SQL syntax error
-        PreparedStatement ps = prep("SELECT * FROM transactions WHERE account_from = " + accountNr + " OFFSET " + offset + " LIMIT " + limit);
+        PreparedStatement ps = prep("SELECT * FROM transactions WHERE account_from = " + accountNr + " OR account_to = " + accountNr + " LIMIT 10 OFFSET " + offset);
         try {
             result = (List<Transaction>) new ObjectMapper<>(Transaction.class).map(ps.executeQuery());
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public abstract class DB {
 
     public static void cardPay(long cardNr, long targetAccount, float amount) {
 
-       CallableStatement cs = Database.getInstance().cardPay(cardNr, targetAccount, amount);
+        CallableStatement cs = Database.getInstance().cardPay(cardNr, targetAccount, amount);
 
         try {
             cs.executeUpdate();

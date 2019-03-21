@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 public class TransactionController {
 
     @FXML Label message;
-    @FXML Label amount;
+    @FXML public Label amount;
     @FXML Label date;
 
     @FXML
@@ -18,7 +18,7 @@ public class TransactionController {
 
     public void setTransaction(Transaction transaction) {
         message.setText(transaction.getMessage());
-        // etc
-        // etc
+        amount.setText(""+transaction.getAmount());
+        date.setText(transaction.getDateAsString());
     }
 }

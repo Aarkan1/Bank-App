@@ -7,21 +7,21 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="150.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="150.0" stylesheets="@navStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
    <content>
-      <VBox prefHeight="398.0" prefWidth="149.0">
+      <VBox prefHeight="348.0" prefWidth="149.0">
          <children>
-            <Button fx:id="homeButton" onAction="#loadHome" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Hem" />
-            <Accordion prefHeight="394.0" prefWidth="136.0">
+            <Button fx:id="homeButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="25.0" prefWidth="148.0" text="Hem" />
+            <Accordion prefHeight="322.0" prefWidth="149.0">
                <panes>
                   <TitledPane animated="false" text="Konton och kort">
                      <content>
-                        <ListView />
+                        <ListView style="-fx-background-color: #F9F8F6;" />
                      </content>
                   </TitledPane>
                   <TitledPane animated="false" text="Betala och överföra">
                      <content>
-                        <ListView />
+                        <ListView style="-fx-background-color: #F9F8F6;" />
                      </content>
                   </TitledPane>
                </panes>

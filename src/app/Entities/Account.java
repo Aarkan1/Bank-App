@@ -14,6 +14,15 @@ public class Account {
     private String type;
     @Column
     private float saldo;
+    private int offset = 0;
+
+    public int getOffset(){
+        return offset;
+    }
+
+    public void incrementOffset(){
+        offset += 10;
+    }
 
     public String getType() {
         return type;

@@ -31,7 +31,6 @@ public class HomeController {
         loadAllAccounts();
 
         System.out.println(LoginController.getUser());
-        System.out.println("User: " + LoginController.getUser().getId());
 
 //        test for paying with card
 //        DB.cardPay(1111222233334444L, 852147483647L, 20.5f);

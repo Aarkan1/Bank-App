@@ -1,13 +1,13 @@
 package app.transaction;
 
 import app.Entities.Account;
-import app.Entities.CT;
 import app.Entities.Transaction;
 import app.db.DB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -23,7 +23,7 @@ public class DisplayTransactionsController {
     @FXML
     Label accountName;
     @FXML
-    Label loadMore;
+    Button loadMore;
 
     private Account account;
 

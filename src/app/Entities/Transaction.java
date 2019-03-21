@@ -38,6 +38,7 @@ public class Transaction {
     }
 
     public String getDateAsString() {
-        return getDate().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).replace('T', ' ');
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YY-MM-dd");
+        return getDate().format(formatter);
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
@@ -11,7 +12,10 @@
    <content>
       <VBox prefHeight="348.0" prefWidth="149.0">
          <children>
-            <Button fx:id="homeButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="25.0" prefWidth="148.0" text="Hem" />
+            <Button fx:id="homeButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="25.0" prefWidth="148.0" text="Hem">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Accordion prefHeight="322.0" prefWidth="149.0">
                <panes>
                   <TitledPane animated="false" text="Konton och kort">
@@ -21,7 +25,35 @@
                   </TitledPane>
                   <TitledPane animated="false" text="Betala och överföra">
                      <content>
-                        <ListView style="-fx-background-color: #F9F8F6;" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="27.0" prefWidth="131.0" style="-fx-background-color: transparent;" text="Framtida betalningar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button onAction="#loadNewTransactions" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Överföringar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Bankgiro/Plusgiro">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Autogiro">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Inställningar">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </VBox>
                      </content>
                   </TitledPane>
                </panes>

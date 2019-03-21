@@ -9,11 +9,13 @@ import app.transaction.TransactionController;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllAccountController {
@@ -21,11 +23,13 @@ public class AllAccountController {
     @FXML
     VBox allAccounts;
 
+    public static List<Account> accounts;
+
     @FXML
     private void initialize() {
 
 //        print all accounts on load
-        List<Account> accounts = DB.getAccounts(LoginController.getUser().getId());
+        accounts = DB.getAccounts(LoginController.getUser().getId());
 
         for (Account account : accounts) {
             printAccount(account);

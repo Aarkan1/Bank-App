@@ -34,8 +34,6 @@ public class AccountController {
 
         accountPane.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
             displayTransactions(account);
-
-            System.out.println(account.getName() + " clicked");
         });
     }
 

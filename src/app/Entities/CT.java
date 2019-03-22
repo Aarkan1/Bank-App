@@ -1,6 +1,10 @@
 package app.Entities;
 
 import app.account.AllAccountController;
+import app.account.accountSettings.ChangeNameSettingsController;
+import app.account.accountSettings.ChangeTypeSettingsController;
+import app.account.accountSettings.CreateNewSettingsController;
+import app.account.accountSettings.DeleteSettingsController;
 import app.home.HomeController;
 import app.nav.NavController;
 import app.transaction.DisplayTransactionsController;
@@ -10,10 +14,31 @@ import app.transaction.DisplayTransactionsController;
  */
 public abstract class CT {
 
+    public static void setChangeNameSettingsController(ChangeNameSettingsController changeNameSettingsController) {
+        CT.changeNameSettingsController = changeNameSettingsController;
+    }
+
     public static AllAccountController allAccountController;
     public static HomeController homeController;
     public static NavController navController;
     public static DisplayTransactionsController displayTransactionsController;
+    public static ChangeNameSettingsController changeNameSettingsController;
+    public static CreateNewSettingsController createNewSettingsController;
+    public static ChangeTypeSettingsController changeTypeSettingsController;
+
+    public static void setCreateNewSettingsController(CreateNewSettingsController createNewSettingsController) {
+        CT.createNewSettingsController = createNewSettingsController;
+    }
+
+    public static void setChangeTypeSettingsController(ChangeTypeSettingsController changeTypeSettingsController) {
+        CT.changeTypeSettingsController = changeTypeSettingsController;
+    }
+
+    public static void setDeleteSettingsController(DeleteSettingsController deleteSettingsController) {
+        CT.deleteSettingsController = deleteSettingsController;
+    }
+
+    public static DeleteSettingsController deleteSettingsController;
 
     public static void setDisplayTransactionsController(DisplayTransactionsController displayTransactionsController) {
         CT.displayTransactionsController = displayTransactionsController;

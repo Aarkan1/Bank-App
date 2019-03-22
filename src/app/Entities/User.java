@@ -4,21 +4,21 @@ package app.Entities;
 import app.annotations.Column;
 
 public class User {
-    @Column("id")
-    private long id;
+    @Column("person_nr")
+    private long personNr;
     @Column
     private String name;
     @Column("age")
     private int age;
 
     public long getId(){
-        return id;
+        return personNr;
     }
 
     public String getName() { return name; }
 
     @Override
     public String toString(){
-        return String.format("User: { id: %d, name: %s, age: %d }", id, name, age);
+        return String.format("User: { personNr: %d, name: %s, age: %d }", personNr, name, age);
     }
 }

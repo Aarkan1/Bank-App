@@ -2,6 +2,7 @@ package app.home;
 
 import app.Entities.CT;
 import app.Main;
+import app.db.DB;
 import app.login.LoginController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,8 @@ public class HomeController {
         loadAllAccounts();
 
         System.out.println(LoginController.getUser());
+
+//        DB.changeAccountType(852147483647L,"salary-account");
 
 //        test for paying with card
 //        DB.cardPay(1111222233334444L, 852147483647L, 20.5f);
@@ -65,24 +68,6 @@ public class HomeController {
     public void setCenter(Scene scene) {
         homePane.setCenter(scene.getRoot());
         BorderPane.setAlignment(homePane.getCenter(), Pos.TOP_CENTER);
-
-    }
-
-    @FXML
-    void goToAccount() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/account/account.fxml"));
-        Parent fxmlInstance = loader.load();
-        Scene scene = new Scene(fxmlInstance, 800, 600);
-
-        // Make sure that you display "the correct account" based on which one you clicked on
-//            AccountController controller = loader.getController();
-//            controller.setAccount(accountFromDB);
-
-        // If you don't want to have/use the static variable Main.stage
-//        Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-        Main.stage.setScene(scene);
-        Main.stage.show();
 
     }
 }

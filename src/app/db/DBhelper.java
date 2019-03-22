@@ -1,5 +1,7 @@
 package app.db;
 
+import app.Entities.Account;
+import app.account.AllAccountController;
 import app.login.LoginController;
 
 import java.sql.PreparedStatement;
@@ -54,6 +56,7 @@ public class DBhelper {
     }
 
     public void deleteAccount(long targetAccount) {
+
         PreparedStatement ps = DB.prep("DELETE FROM accounts WHERE account_nr = ?");
 
         try {
@@ -77,6 +80,16 @@ public class DBhelper {
     }
 
     public void changeAccountType(long targetAccount, String newType) {
+
+        //        may only have 1 salary account
+        if (newType.equals("salary-account")) {
+            changeSalaryAccount(newType);
+        }
+//        must have a salary account
+        if (checkAccountType(targetAccount, "salary-account")){
+            return;
+        }
+
         PreparedStatement ps = DB.prep("UPDATE accounts SET `type` = ? WHERE account_nr = ?");
 
         try {
@@ -86,5 +99,20 @@ public class DBhelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    void changeSalaryAccount(String type) {
+        AllAccountController.accounts.forEach(a -> {
+            if (a.getType().equals(type))
+                changeAccountType(a.getAccountNr(), "savings");
+        });
+    }
+
+    boolean checkAccountType(long targetAccount, String type) {
+        for (Account a : AllAccountController.accounts) {
+            if (a.getAccountNr() == targetAccount && a.getType().equals(type))
+                return true;
+        }
+        return false;
     }
 }

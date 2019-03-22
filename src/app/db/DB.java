@@ -75,7 +75,7 @@ public abstract class DB {
 
     public static List<Account> getAccounts(long userId) {
         List<Account> result = null;
-        PreparedStatement ps = prep("SELECT * FROM accounts WHERE user_id = " + userId);
+        PreparedStatement ps = prep("SELECT * FROM accounts WHERE user_person_nr = " + userId);
         try {
             result = (List<Account>) new ObjectMapper<>(Account.class).map(ps.executeQuery());
         } catch (Exception e) {

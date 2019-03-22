@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane  style="-fx-background-color: transparent;"  hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="360.0" stylesheets="@../accountStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.account.accountSettings.ChangeNameSettingsController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="360.0" style="-fx-background-color: transparent;" stylesheets="@../accountStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.account.accountSettings.ChangeNameSettingsController">
    <content>
       <VBox fx:id="changeNameSettings" prefHeight="255.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #F9F8F6;">
          <children>
@@ -14,7 +18,20 @@
                <font>
                   <Font name="Lucida Sans Regular" size="20.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </Label>
+            <Label text="Välj konto" />
+            <ChoiceBox prefWidth="150.0" />
+            <Label text="Nytt namn" />
+            <TextField />
+            <HBox prefHeight="27.0" prefWidth="350.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Avbryt" />
+                  <Button mnemonicParsing="false" text="Spara" />
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

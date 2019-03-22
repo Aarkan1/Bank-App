@@ -35,6 +35,8 @@ public class NavController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        changeNameSettingsScreen();
     }
 
     Scene loadFXML(String fxmlRoute) {

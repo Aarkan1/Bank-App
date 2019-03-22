@@ -29,8 +29,10 @@ public class DBhelper {
         }
     }
 
-    public void moveMoneyBetweenAccounts(long from, long to, double amount) {
-        transferMoney(amount, "" + from, from, to);
+    public void moveMoneyBetweenAccounts(long from, long to, double amount, String message) {
+        message = message.trim();
+        String sendMsg = message.length() > 0 ? message : "" + from;
+        transferMoney(amount, sendMsg, from, to);
     }
 
     public void createNewAccount(String name, String type) {
@@ -86,7 +88,7 @@ public class DBhelper {
             changeSalaryAccount(newType);
         }
 //        must have a salary account
-        if (checkAccountType(targetAccount, "salary-account")){
+        if (checkAccountType(targetAccount, "salary-account")) {
             return;
         }
 

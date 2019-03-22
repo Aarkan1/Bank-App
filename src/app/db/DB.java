@@ -15,8 +15,8 @@ import java.util.List;
 public abstract class DB {
 
 
-    public static void moveMoneyBetweenAccounts(long from, long to, double amount) {
-        DBhelper.getDBhelper().moveMoneyBetweenAccounts(from, to, amount);
+    public static void moveMoneyBetweenAccounts(long from, long to, double amount, String message) {
+        DBhelper.getDBhelper().moveMoneyBetweenAccounts(from, to, amount, message);
     }
 
     public static void createNewAccount(String name, String type) {

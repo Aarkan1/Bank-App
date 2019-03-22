@@ -21,6 +21,7 @@ public class NewTransactionController {
     ChoiceBox<String> accountFrom = new ChoiceBox<>();
     ChoiceBox<String> accountTo = new ChoiceBox<>();
     TextField amountField = new TextField();
+    TextField messageField = new TextField();
     Label errorLabel = new Label();
 
     @FXML
@@ -32,6 +33,7 @@ public class NewTransactionController {
         Label fromLabel = new Label("Från");
         Label toLabel = new Label("Till");
         Label amountLabel = new Label("Belopp");
+        Label messageLabel = new Label("Meddelande");
         toLabel.setPadding(new Insets(10, 0, 0, 0));
         amountLabel.setPadding(new Insets(10, 0, 0, 0));
 
@@ -44,7 +46,7 @@ public class NewTransactionController {
 
         Button submitButton = new Button("Spara");
         submitButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) ->
-                moveMoneyBetweenAccounts(accountFrom.getValue(), accountTo.getValue(), amountField.getText()));
+                moveMoneyBetweenAccounts(accountFrom.getValue(), accountTo.getValue(), amountField.getText(), messageField.getText()));
 
         buttonsHBox.getChildren().addAll(cancelButton, submitButton);
         buttonsHBox.setSpacing(10);
@@ -57,6 +59,8 @@ public class NewTransactionController {
                 accountTo,
                 amountLabel,
                 amountField,
+                messageLabel,
+                messageField,
                 errorLabel,
                 buttonsHBox);
     }
@@ -73,7 +77,7 @@ public class NewTransactionController {
 
     void nodeSettings() {
         payMethods.setAlignment(Pos.TOP_LEFT);
-        payMethods.setSpacing(10);
+        payMethods.setSpacing(5);
 
         accountFrom.setPrefWidth(200);
         accountTo.setPrefWidth(200);
@@ -83,7 +87,7 @@ public class NewTransactionController {
         accountTo.getSelectionModel().selectLast();
     }
 
-    void moveMoneyBetweenAccounts(String from, String to, String amount) {
+    void moveMoneyBetweenAccounts(String from, String to, String amount, String message) {
 
         if (!amount.matches("^[\\d]+$")) {
             errorLabel.setTextFill(Color.RED);
@@ -103,7 +107,7 @@ public class NewTransactionController {
             errorLabel.setTextFill(Color.RED);
             errorLabel.setText("Beloppet stämmer inte");
         } else {
-            DB.moveMoneyBetweenAccounts(fromAcc, toAcc, inputAmount);
+            DB.moveMoneyBetweenAccounts(fromAcc, toAcc, inputAmount, message);
             CT.navController.loadHome();
         }
     }

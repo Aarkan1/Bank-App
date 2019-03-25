@@ -30,6 +30,13 @@ public abstract class DB {
     public static void changeAccountType(String targetAccount, String newType) {
         DBhelper.getDBhelper().changeAccountType(targetAccount, newType);
     }
+    public static void addNewAccount(String targetAccount, String accountName) {
+        DBhelper.getDBhelper().addNewAccount(targetAccount, accountName);
+    }
+
+    public static void startScheduledTransfer(double amount, String fromAccount, String toAccount){
+        DBschedules.getSingleton().startScheduledTransfer(amount,fromAccount,toAccount);
+    }
 
     public static void deleteAccount(String targetAccount) {
         DBhelper.getDBhelper().deleteAccount(targetAccount);
@@ -64,7 +71,6 @@ public abstract class DB {
     public static List<Transaction> getTransactions(String accountNr, int offset) {
 
         List<Transaction> result = null;
-//        PreparedStatement ps = prep("CALL get_transactions(?, ?)");
         PreparedStatement ps = prep("SELECT * FROM transactions WHERE account_from = ? OR account_to = ? LIMIT 10 OFFSET ?");
         try {
             ps.setString(1, accountNr);
@@ -87,6 +93,18 @@ public abstract class DB {
             e.printStackTrace();
         }
         return result; // return Accounts;
+    }
+
+    public static List<Account> getAddedAccounts(String userId) {
+        List<Account> result = null;
+        PreparedStatement ps = prep("SELECT * FROM addedaccounts WHERE user_person_nr = ?");
+        try {
+            ps.setString(1, userId);
+            result = (List<Account>) new ObjectMapper<>(Account.class).map(ps.executeQuery());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result; // return added Accounts;
     }
 
     public static void cardPay(long cardNr, String targetAccount, double amount) {

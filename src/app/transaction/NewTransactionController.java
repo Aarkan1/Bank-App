@@ -2,7 +2,6 @@ package app.transaction;
 
 import app.Entities.Account;
 import app.Entities.CT;
-import app.account.AllAccountController;
 import app.db.DB;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -18,8 +17,8 @@ public class NewTransactionController {
     @FXML
     VBox payMethods;
 
-    ChoiceBox<String> accountFrom = new ChoiceBox<>();
-    ChoiceBox<String> accountTo = new ChoiceBox<>();
+    ChoiceBox<Account> accountFrom = new ChoiceBox<>();
+    ChoiceBox<Account> accountTo = new ChoiceBox<>();
     TextField amountField = new TextField();
     TextField messageField = new TextField();
     Label errorLabel = new Label();
@@ -46,7 +45,7 @@ public class NewTransactionController {
 
         Button submitButton = new Button("Spara");
         submitButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) ->
-                moveMoneyBetweenAccounts(accountFrom.getValue(), accountTo.getValue(), amountField.getText(), messageField.getText()));
+                moveMoneyBetweenAccounts(accountFrom.getValue().getAccountNr(), accountTo.getValue().getAccountNr(), amountField.getText(), messageField.getText()));
 
         buttonsHBox.getChildren().addAll(cancelButton, submitButton);
         buttonsHBox.setSpacing(10);
@@ -66,12 +65,26 @@ public class NewTransactionController {
     }
 
     void fillAccountBoxes() {
-        for (Account account : AllAccountController.accounts) {
+        for (Account account : CT.accounts) {
 
-            String itemText = String.format("%s\t\t%2.2f", account.getAccountNr(), account.getSaldo());
+//            String itemText = String.format("%s\t\t%2.2f", account.getAccountNr(), account.getSaldo());
 
-            accountFrom.getItems().add(itemText);
-            accountTo.getItems().add(itemText);
+            accountFrom.getItems().add(account);
+            accountTo.getItems().add(account);
+        }
+        Account seperator = new Account("---------");
+        seperator.setAddedAccount();
+        accountTo.getItems().add(seperator);
+
+        addedAccounts();
+    }
+
+    void addedAccounts(){
+        for (Account account : CT.addedAccounts) {
+
+            String itemText = String.format("%s", account.getName());
+
+            accountTo.getItems().add(account);
         }
     }
 

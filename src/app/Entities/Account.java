@@ -14,13 +14,26 @@ public class Account {
     private String type;
     @Column
     private double saldo;
+    private boolean addedAccount = false;
+
     private int offset = 0;
 
-    public int getOffset(){
+    public Account(String seperator) {
+        this.name = seperator;
+    }
+
+    public Account() {
+    }
+
+    public void setAddedAccount() {
+        addedAccount = true;
+    }
+
+    public int getOffset() {
         return offset;
     }
 
-    public void incrementOffset(){
+    public void incrementOffset() {
         offset += 10;
     }
 
@@ -42,6 +55,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("%s %-3.2f", name, saldo);
+        return addedAccount ? name : String.format("%s\t\t%-3.2f", name, saldo);
     }
 }

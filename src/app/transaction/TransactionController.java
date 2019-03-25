@@ -16,8 +16,6 @@ public class TransactionController {
 
     @FXML
     private void initialize() {
-
-
     }
 
     public void setTransaction(Transaction transaction) {

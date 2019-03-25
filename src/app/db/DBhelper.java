@@ -1,6 +1,7 @@
 package app.db;
 
 import app.Entities.Account;
+import app.Entities.CT;
 import app.account.AllAccountController;
 import app.login.LoginController;
 
@@ -92,16 +93,29 @@ public class DBhelper {
             e.printStackTrace();
         }
     }
+   public void addNewAccount(String targetAccount, String accountName) {
+
+        PreparedStatement ps = DB.prep("INSERT INTO userXaccounts SET user_person_nr = ?, account_nr = ?, `name` = ?");
+
+        try {
+            ps.setString(1, LoginController.getUser().getId());
+            ps.setString(2, targetAccount);
+            ps.setString(3, accountName);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     void changeSalaryAccount(String type) {
-        AllAccountController.accounts.forEach(a -> {
+        CT.accounts.forEach(a -> {
             if (a.getType().equals(type))
                 changeAccountType(a.getAccountNr(), "savings");
         });
     }
 
     boolean checkAccountType(String targetAccount, String type) {
-        for (Account a : AllAccountController.accounts) {
+        for (Account a : CT.accounts) {
             if (a.getAccountNr().equals(targetAccount) && a.getType().equals(type))
                 return true;
         }

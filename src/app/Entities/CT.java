@@ -9,11 +9,15 @@ import app.home.HomeController;
 import app.nav.NavController;
 import app.transaction.DisplayTransactionsController;
 
+import java.util.List;
+
 /**
  * A Helper class for global access to controllers
  */
 public abstract class CT {
 
+    public static List<Account> accounts;
+    public static List<Account> addedAccounts;
     public static AllAccountController allAccountController;
     public static HomeController homeController;
     public static NavController navController;

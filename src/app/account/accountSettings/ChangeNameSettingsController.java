@@ -2,7 +2,6 @@ package app.account.accountSettings;
 
 import app.Entities.Account;
 import app.Entities.CT;
-import app.account.AllAccountController;
 import app.db.DB;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -24,7 +23,7 @@ public class ChangeNameSettingsController {
     }
 
     void fillAccountBoxes() {
-        for (Account account : AllAccountController.accounts) {
+        for (Account account : CT.accounts) {
             accountBox.getItems().add(account);
         }
         accountBox.getSelectionModel().selectFirst();
@@ -35,7 +34,7 @@ public class ChangeNameSettingsController {
 
         String newNameText = newName.getText().trim();
 
-        for(Account account : AllAccountController.accounts){
+        for(Account account : CT.accounts){
             if(account.getName().equals(newNameText)){
                 errorMessage.setText("Namnet används redan");
                 return;

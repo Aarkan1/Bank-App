@@ -14,22 +14,22 @@ public class DBhelper {
         return singleton;
     }
 
-    public void transferMoney(double amount, String message, long from, long to) {
+    public void transferMoney(double amount, String message, String from, String to) {
 
         PreparedStatement ps = DB.prep("CALL transfer_money(?, ?, ?, ?)");
 
         try {
             ps.setDouble(1, amount);
             ps.setString(2, message);
-            ps.setDouble(3, from);
-            ps.setDouble(4, to);
+            ps.setString(3, from);
+            ps.setString(4, to);
             ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void moveMoneyBetweenAccounts(long from, long to, double amount, String message) {
+    public void moveMoneyBetweenAccounts(String from, String to, double amount, String message) {
         message = message.trim();
         String sendMsg = message.length() > 0 ? message : "" + from;
         transferMoney(amount, sendMsg, from, to);
@@ -41,14 +41,13 @@ public class DBhelper {
         String clearingNr = "8521";
         int accountNrRnd = (int) (Math.random() * 80000000) + 10000000;
         clearingNr += accountNrRnd;
-        long accountNrLong = Long.parseLong(clearingNr);
-        int userID = (int) LoginController.getUser().getId();
+        String userID = LoginController.getUser().getId();
 
-        PreparedStatement ps = DB.prep("INSERT INTO accounts SET account_nr = ?, user_id = ?, `name` = ?, `type` = ?");
+        PreparedStatement ps = DB.prep("INSERT INTO accounts SET account_nr = ?, user_person_nr = ?, `name` = ?, `type` = ?");
 
         try {
-            ps.setLong(1, accountNrLong);
-            ps.setInt(2, userID);
+            ps.setString(1, clearingNr);
+            ps.setString(2, userID);
             ps.setString(3, name);
             ps.setString(4, type);
             ps.executeUpdate();
@@ -57,46 +56,37 @@ public class DBhelper {
         }
     }
 
-    public void deleteAccount(long targetAccount) {
+    public void deleteAccount(String targetAccount) {
 
         PreparedStatement ps = DB.prep("DELETE FROM accounts WHERE account_nr = ?");
 
         try {
-            ps.setLong(1, targetAccount);
+            ps.setString(1, targetAccount);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void changeAccountName(long targetAccount, String newName) {
+    public void changeAccountName(String targetAccount, String newName) {
         PreparedStatement ps = DB.prep("UPDATE accounts SET `name` = ? WHERE account_nr = ?");
 
         try {
             ps.setString(1, newName);
-            ps.setLong(2, targetAccount);
+            ps.setString(2, targetAccount);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void changeAccountType(long targetAccount, String newType) {
-
-        //        may only have 1 salary account
-        if (newType.equals("salary-account")) {
-            changeSalaryAccount(newType);
-        }
-//        must have a salary account
-        if (checkAccountType(targetAccount, "salary-account")) {
-            return;
-        }
+    public void changeAccountType(String targetAccount, String newType) {
 
         PreparedStatement ps = DB.prep("UPDATE accounts SET `type` = ? WHERE account_nr = ?");
 
         try {
             ps.setString(1, newType);
-            ps.setLong(2, targetAccount);
+            ps.setString(2, targetAccount);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,9 +100,9 @@ public class DBhelper {
         });
     }
 
-    boolean checkAccountType(long targetAccount, String type) {
+    boolean checkAccountType(String targetAccount, String type) {
         for (Account a : AllAccountController.accounts) {
-            if (a.getAccountNr() == targetAccount && a.getType().equals(type))
+            if (a.getAccountNr().equals(targetAccount) && a.getType().equals(type))
                 return true;
         }
         return false;

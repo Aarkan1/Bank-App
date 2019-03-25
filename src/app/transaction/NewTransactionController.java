@@ -68,7 +68,7 @@ public class NewTransactionController {
     void fillAccountBoxes() {
         for (Account account : AllAccountController.accounts) {
 
-            String itemText = String.format("%d\t\t%2.2f", account.getAccountNr(), account.getSaldo());
+            String itemText = String.format("%s\t\t%2.2f", account.getAccountNr(), account.getSaldo());
 
             accountFrom.getItems().add(itemText);
             accountTo.getItems().add(itemText);
@@ -98,16 +98,16 @@ public class NewTransactionController {
         String[] fromSplit = from.split("\t");
         String[] toSplit = to.split("\t");
 
-        long fromAcc = Long.parseLong(fromSplit[0]);
+//        long fromAcc = Long.parseLong(fromSplit[0]);
         double fromSaldo = Double.parseDouble(fromSplit[fromSplit.length - 1].replace(",", "."));
-        long toAcc = Long.parseLong(toSplit[0]);
+//        long toAcc = Long.parseLong(toSplit[0]);
         double inputAmount = Double.parseDouble(amount);
 
         if (inputAmount > fromSaldo) {
             errorLabel.setTextFill(Color.RED);
             errorLabel.setText("Beloppet stämmer inte");
         } else {
-            DB.moveMoneyBetweenAccounts(fromAcc, toAcc, inputAmount, message);
+            DB.moveMoneyBetweenAccounts(fromSplit[0], toSplit[0], inputAmount, message);
             CT.navController.loadHome();
         }
     }

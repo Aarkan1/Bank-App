@@ -32,12 +32,12 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="34.0" prefWidth="600.0">
                <children>
-                  <Label text="E-mail">
+                  <Label text="Personnr">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="input_email" text="kalle@abc.se" />
+                  <TextField fx:id="input_userID" text="750312-3453" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
@@ -50,7 +50,10 @@
                   <PasswordField fx:id="input_password" text="abc12345?" />
                </children>
             </HBox>
-            <Label fx:id="errorMessage" prefHeight="17.0" prefWidth="0.0" textFill="RED" />
+            <Label fx:id="loginError" alignment="TOP_CENTER" prefHeight="17.0" prefWidth="300.0" textFill="RED">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin></Label>
             <Button mnemonicParsing="false" onAction="#login" text="Logga in" />
          </children>
       </VBox>

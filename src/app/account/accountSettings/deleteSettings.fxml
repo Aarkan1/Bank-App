@@ -22,12 +22,12 @@
                </VBox.margin>
             </Label>
             <Label text="Välj konto" />
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox fx:id="accountToDelete" prefWidth="150.0" />
             <Label fx:id="warningMessage" />
             <HBox prefHeight="28.0" prefWidth="350.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Avbryt" />
-                  <Button mnemonicParsing="false" text="Ta bort" />
+                  <Button onAction="#cancelDelete" mnemonicParsing="false" text="Avbryt" />
+                  <Button onAction="#deleteAccount" mnemonicParsing="false" text="Ta bort" />
                </children>
             </HBox>
          </children>

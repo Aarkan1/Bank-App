@@ -29,7 +29,7 @@ public class AccountController {
 
     public void setAccount(Account account) {
         accountName.setText(account.getName());
-        accountNr.setText("" + account.getAccountNr());
+        accountNr.setText(account.getAccountNr());
         accountSaldo.setText("" + account.getSaldo());
 
         accountPane.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {

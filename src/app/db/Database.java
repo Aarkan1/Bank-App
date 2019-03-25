@@ -34,13 +34,13 @@ public class Database {
         return ps;
     }
 
-    public CallableStatement cardPay(long cardNr, long targetAccount, double amount) {
+    public CallableStatement cardPay(long cardNr, String targetAccount, double amount) {
 
         CallableStatement stmt = null;
         try {
             stmt = conn.prepareCall("{call card_pay(?, ?, ?)}");
             stmt.setLong(1, cardNr);
-            stmt.setLong(2, targetAccount);
+            stmt.setString(2, targetAccount);
             stmt.setDouble(3, amount);
         } catch (SQLException e) {
             e.printStackTrace();

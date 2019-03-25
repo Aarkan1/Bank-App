@@ -5,13 +5,13 @@ import app.annotations.Column;
 
 public class User {
     @Column("person_nr")
-    private long personNr;
+    private String personNr;
     @Column
     private String name;
     @Column("age")
     private int age;
 
-    public long getId(){
+    public String getId(){
         return personNr;
     }
 
@@ -19,6 +19,6 @@ public class User {
 
     @Override
     public String toString(){
-        return String.format("User: { personNr: %d, name: %s, age: %d }", personNr, name, age);
+        return String.format("User: { personNr: %s, name: %s, age: %d }", personNr, name, age);
     }
 }

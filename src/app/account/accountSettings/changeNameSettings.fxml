@@ -23,13 +23,14 @@
                </VBox.margin>
             </Label>
             <Label text="Välj konto" />
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox fx:id="accountBox" prefWidth="150.0" />
             <Label text="Nytt namn" />
-            <TextField />
+            <TextField fx:id="newName" />
+            <Label fx:id="errorMessage" textFill="RED" />
             <HBox prefHeight="27.0" prefWidth="350.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Avbryt" />
-                  <Button mnemonicParsing="false" text="Spara" />
+                  <Button onAction="#cancelChange" mnemonicParsing="false" text="Avbryt" />
+                  <Button onAction="#submitChange" mnemonicParsing="false" text="Spara" />
                </children>
             </HBox>
          </children>

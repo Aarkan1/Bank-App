@@ -14,10 +14,6 @@ import app.transaction.DisplayTransactionsController;
  */
 public abstract class CT {
 
-    public static void setChangeNameSettingsController(ChangeNameSettingsController changeNameSettingsController) {
-        CT.changeNameSettingsController = changeNameSettingsController;
-    }
-
     public static AllAccountController allAccountController;
     public static HomeController homeController;
     public static NavController navController;
@@ -25,6 +21,10 @@ public abstract class CT {
     public static ChangeNameSettingsController changeNameSettingsController;
     public static CreateNewSettingsController createNewSettingsController;
     public static ChangeTypeSettingsController changeTypeSettingsController;
+
+    public static void setChangeNameSettingsController(ChangeNameSettingsController changeNameSettingsController) {
+        CT.changeNameSettingsController = changeNameSettingsController;
+    }
 
     public static void setCreateNewSettingsController(CreateNewSettingsController createNewSettingsController) {
         CT.createNewSettingsController = createNewSettingsController;
@@ -56,4 +56,16 @@ public abstract class CT {
         CT.navController = navController;
     }
 
+    public static String getAccountType(String type){
+        switch (type) {
+            case "Sparkonto":
+                return "savings";
+            case "Kortkonto":
+                return "card-account";
+            case "Lönkonto":
+                return "salary-account";
+            default:
+                return  "savings";
+        }
+    }
 }

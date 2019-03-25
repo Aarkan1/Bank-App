@@ -18,11 +18,11 @@ import java.io.IOException;
 public class LoginController {
 
     @FXML
-    TextField input_email;
+    TextField input_userID;
     @FXML
     TextField input_password;
     @FXML
-    Label errorMessage;
+    Label loginError;
 
     // Use this in other Controllers to get "the currently logged in user".
     private static User user = null;
@@ -34,19 +34,19 @@ public class LoginController {
     @FXML
     private void initialize() {
         System.out.println("initialize login");
-        errorMessage.setTextFill(Color.RED);
+        loginError.setTextFill(Color.RED);
     }
 
     @FXML
     void login() {
-        if (!input_email.getText().matches("^[\\w-]{2,}@[a-z]{2,8}\\.[a-z]{2,8}[\\.a-z]*$") ||
+        if (!input_userID.getText().matches("^[\\d]{6}-[\\d]{4}$") ||
                 !input_password.getText().matches("^[\\w-@!#%&?]{8,20}$")) {
-            errorMessage.setText("E-mail or password is wrong");
+            loginError.setText("Personnr eller lösenord är fel");
         } else {
-            user = DB.getMatchingUser(input_email.getText(), input_password.getText());
+            user = DB.getMatchingUser(input_userID.getText(), input_password.getText());
             // if null display error
             if (user == null) {
-                errorMessage.setText("E-mail or password is wrong");
+                loginError.setText("Personnr eller lösenord är fel");
                 // else switchScene to Home
             } else {
                 switchScene("/app/home/home.fxml");

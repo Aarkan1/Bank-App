@@ -19,10 +19,10 @@ public class Transaction {
     @Column
     private java.sql.Timestamp date;
     @Column("account_from")
-    private java.math.BigInteger accountFrom;
+    private String accountFrom;
 
-    public boolean isIncome(long amount){
-        return amount == Long.parseLong(accountFrom.toString()) ? false : true;
+    public boolean isIncome(String account){
+        return accountFrom.equals(account) ? false : true;
     }
 
     public String getMessage() {

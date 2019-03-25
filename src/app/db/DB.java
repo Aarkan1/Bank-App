@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class DB {
 
 
-    public static void moveMoneyBetweenAccounts(long from, long to, double amount, String message) {
+    public static void moveMoneyBetweenAccounts(String from, String to, double amount, String message) {
         DBhelper.getDBhelper().moveMoneyBetweenAccounts(from, to, amount, message);
     }
 
@@ -23,15 +23,15 @@ public abstract class DB {
         DBhelper.getDBhelper().createNewAccount(name, type);
     }
 
-    public static void changeAccountName(long targetAccount, String newName) {
+    public static void changeAccountName(String targetAccount, String newName) {
         DBhelper.getDBhelper().changeAccountName(targetAccount, newName);
     }
 
-    public static void changeAccountType(long targetAccount, String newType) {
+    public static void changeAccountType(String targetAccount, String newType) {
         DBhelper.getDBhelper().changeAccountType(targetAccount, newType);
     }
 
-    public static void deleteAccount(long targetAccount) {
+    public static void deleteAccount(String targetAccount) {
         DBhelper.getDBhelper().deleteAccount(targetAccount);
     }
 
@@ -43,11 +43,11 @@ public abstract class DB {
         return Database.getInstance().callableStatement(procedure, params);
     }
 
-    public static User getMatchingUser(String email, String password) {
+    public static User getMatchingUser(String userID, String password) {
         User result = null;
-        PreparedStatement ps = prep("SELECT * FROM users WHERE email = ? AND password = ?");
+        PreparedStatement ps = prep("SELECT * FROM users WHERE person_nr = ? AND password = ?");
         try {
-            ps.setString(1, email);
+            ps.setString(1, userID);
             ps.setString(2, password);
             result = (User) new ObjectMapper<>(User.class).mapOne(ps.executeQuery());
         } catch (Exception e) {
@@ -57,15 +57,19 @@ public abstract class DB {
     }
 
     //        Example method with default parameters
-    public static List<Transaction> getTransactions(long accountNr) {
+    public static List<Transaction> getTransactions(String accountNr) {
         return getTransactions(accountNr, 0);
     }
 
-    public static List<Transaction> getTransactions(long accountNr, int offset) {
+    public static List<Transaction> getTransactions(String accountNr, int offset) {
 
         List<Transaction> result = null;
-        PreparedStatement ps = prep("SELECT * FROM transactions WHERE account_from = " + accountNr + " OR account_to = " + accountNr + " LIMIT 10 OFFSET " + offset);
+//        PreparedStatement ps = prep("CALL get_transactions(?, ?)");
+        PreparedStatement ps = prep("SELECT * FROM transactions WHERE account_from = ? OR account_to = ? LIMIT 10 OFFSET ?");
         try {
+            ps.setString(1, accountNr);
+            ps.setString(2, accountNr);
+            ps.setInt(3, offset);
             result = (List<Transaction>) new ObjectMapper<>(Transaction.class).map(ps.executeQuery());
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,10 +77,11 @@ public abstract class DB {
         return result; // return Transactions;
     }
 
-    public static List<Account> getAccounts(long userId) {
+    public static List<Account> getAccounts(String userId) {
         List<Account> result = null;
-        PreparedStatement ps = prep("SELECT * FROM accounts WHERE user_person_nr = " + userId);
+        PreparedStatement ps = prep("SELECT * FROM accounts WHERE user_person_nr = ?");
         try {
+            ps.setString(1, userId);
             result = (List<Account>) new ObjectMapper<>(Account.class).map(ps.executeQuery());
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +89,7 @@ public abstract class DB {
         return result; // return Accounts;
     }
 
-    public static void cardPay(long cardNr, long targetAccount, double amount) {
+    public static void cardPay(long cardNr, String targetAccount, double amount) {
 
         CallableStatement cs = Database.getInstance().cardPay(cardNr, targetAccount, amount);
 

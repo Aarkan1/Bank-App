@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class Account {
     @Column("account_nr")
-    private long accountNr;
+    private String accountNr;
     @Column
     private String name;
     @Column
@@ -36,12 +36,12 @@ public class Account {
         return saldo;
     }
 
-    public long getAccountNr() {
+    public String getAccountNr() {
         return accountNr;
     }
 
     @Override
     public String toString() {
-        return String.format("Account: { Nr: %d, Type: %s, Saldo: %f }", accountNr, type, saldo);
+        return String.format("%s %-3.2f", name, saldo);
     }
 }

@@ -28,7 +28,6 @@ public class AllAccountController {
         for (Account account : accounts) {
             printAccount(account);
         }
-
     }
 
     void printAccount(Account account) {

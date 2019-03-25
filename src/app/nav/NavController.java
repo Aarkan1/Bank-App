@@ -71,22 +71,22 @@ public class NavController {
     }
 
     @FXML
-    void changeNameSettingsScreen() {
+    public void changeNameSettingsScreen() {
         CT.setChangeNameSettingsController(loadAccountSettingsController("/app/account/accountSettings/changeNameSettings.fxml"));
     }
 
     @FXML
-    void changeTypeSettingsScreen() {
+    public void changeTypeSettingsScreen() {
         CT.setChangeTypeSettingsController(loadAccountSettingsController("/app/account/accountSettings/changeTypeSettings.fxml"));
     }
 
     @FXML
-    void createNewSettingsScreen() {
+    public void createNewSettingsScreen() {
         CT.setCreateNewSettingsController(loadAccountSettingsController("/app/account/accountSettings/createNewSettings.fxml"));
     }
 
     @FXML
-    void deleteSettingsScreen() {
+    public void deleteSettingsScreen() {
         CT.setDeleteSettingsController(loadAccountSettingsController("/app/account/accountSettings/deleteSettings.fxml"));
     }
 

@@ -21,14 +21,6 @@ public class HomeController {
     public BorderPane homePane;
 
     @FXML
-    DatePicker datePicker;
-
-    @FXML
-    void printDate(){
-        System.out.println(datePicker.getEditor().getText());
-    }
-
-    @FXML
     void initialize() {
         // load accounts from db using LoginController.user.getId() and display them
         System.out.println("initialize home");

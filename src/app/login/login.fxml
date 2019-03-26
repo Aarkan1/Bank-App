@@ -34,7 +34,7 @@
                <children>
                   <Label text="Personnr">
                      <HBox.margin>
-                        <Insets right="20.0" />
+                        <Insets right="5.0" />
                      </HBox.margin>
                   </Label>
                   <TextField fx:id="input_userID" text="750312-3453" />

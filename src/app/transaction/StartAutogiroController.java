@@ -5,10 +5,9 @@ import app.Entities.CT;
 import app.db.DB;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class StartMonthlySavingController {
+public class StartAutogiroController {
 
     @FXML
     TextField savingsAmount;
@@ -20,6 +19,7 @@ public class StartMonthlySavingController {
     @FXML
     private void initialize() {
         fillAccountBoxes();
+        addedAccounts();
     }
 
     void fillAccountBoxes() {
@@ -28,7 +28,18 @@ public class StartMonthlySavingController {
             accountFrom.getItems().add(account);
         }
         accountFrom.getSelectionModel().selectFirst();
-        accountTo.getSelectionModel().selectLast();
+
+        Account seperator = new Account("---------");
+        seperator.setAddedAccount();
+        accountTo.getItems().add(seperator);
+
+    }
+
+    void addedAccounts() {
+        for (Account account : CT.addedAccounts) {
+            accountTo.getItems().add(account);
+        }
+        accountTo.getSelectionModel().selectFirst();
     }
 
     @FXML

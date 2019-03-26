@@ -26,6 +26,11 @@ public class NavController {
     }
 
     @FXML
+    void loadAutogiro() {
+        changeHomeCenter("/app/transaction/startAutogiro.fxml");
+    }
+
+    @FXML
     void loadAddAccount() {
         changeHomeCenter("/app/account/addNewAccount.fxml");
     }

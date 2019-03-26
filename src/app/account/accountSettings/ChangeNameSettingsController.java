@@ -22,7 +22,7 @@ public class ChangeNameSettingsController {
         fillAccountBoxes();
     }
 
-    void fillAccountBoxes() {
+    private void fillAccountBoxes() {
         for (Account account : CT.accounts) {
             accountBox.getItems().add(account);
         }
@@ -30,12 +30,12 @@ public class ChangeNameSettingsController {
     }
 
     @FXML
-    void submitChange(){
+    void submitChange() {
 
         String newNameText = newName.getText().trim();
 
-        for(Account account : CT.accounts){
-            if(account.getName().equals(newNameText)){
+        for (Account account : CT.accounts) {
+            if (account.getName().equals(newNameText)) {
                 errorMessage.setText("Namnet används redan");
                 return;
             }
@@ -46,7 +46,7 @@ public class ChangeNameSettingsController {
     }
 
     @FXML
-    void cancelChange(){
+    void cancelChange() {
         CT.navController.loadHome();
     }
 

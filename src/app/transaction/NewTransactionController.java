@@ -64,7 +64,7 @@ public class NewTransactionController {
 
         buttonsHBox.getChildren().addAll(cancelButton, submitButton);
         buttonsHBox.setSpacing(10);
-        buttonsHBox.setAlignment(Pos.CENTER_RIGHT);
+        buttonsHBox.setAlignment(Pos.CENTER_LEFT);
 
         payMethods.getChildren().add(buttonsHBox);
     }

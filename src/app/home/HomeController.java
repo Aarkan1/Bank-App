@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
@@ -18,6 +19,14 @@ public class HomeController {
 
     @FXML
     public BorderPane homePane;
+
+    @FXML
+    DatePicker datePicker;
+
+    @FXML
+    void printDate(){
+        System.out.println(datePicker.getEditor().getText());
+    }
 
     @FXML
     void initialize() {

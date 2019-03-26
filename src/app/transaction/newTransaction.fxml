@@ -8,26 +8,27 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" stylesheets="@transactionStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.transaction.NewTransactionController">
-   <children>
-      <VBox prefHeight="346.0" prefWidth="398.0" style="-fx-background-color: #F9F8F6;">
-         <children>
-            <Label fx:id="accountName" alignment="CENTER" text="Ny betalning/överföring" textFill="#f35b1c">
-               <font>
-                  <Font name="Lucida Sans Regular" size="25.0" />
-               </font>
-            </Label>
-            <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Line>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="293.0" prefWidth="398.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
-               <content>
-                  <VBox fx:id="payMethods" alignment="TOP_CENTER" prefHeight="290.0" prefWidth="398.0" />
-               </content>
-            </ScrollPane>
-         </children>
-      </VBox>
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0"
+      prefWidth="400.0" stylesheets="@transactionStyle.css" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.transaction.NewTransactionController">
+    <VBox prefHeight="346.0" prefWidth="398.0" style="-fx-background-color: #F9F8F6;">
+        <Label fx:id="accountName" alignment="CENTER" text="Ny betalning/överföring" textFill="#f35b1c">
+            <font>
+                <Font name="Lucida Sans Regular" size="25.0"/>
+            </font>
+        </Label>
+        <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </Line>
+        <ScrollPane hbarPolicy="NEVER" prefHeight="293.0" prefWidth="398.0" style="-fx-background-color: transparent;"
+                    vbarPolicy="NEVER">
+            <VBox fx:id="payMethods" alignment="TOP_CENTER" prefHeight="290.0" prefWidth="398.0">
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </VBox>
 </Pane>

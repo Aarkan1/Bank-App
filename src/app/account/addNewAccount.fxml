@@ -10,45 +10,41 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.account.AddNewAccountController">
-   <content>
-      <VBox prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: #F9F8F6;">
-         <children>
-            <Label alignment="CENTER" text="Lägg till nytt konto" textFill="#f35b1c">
-               <font>
-                  <Font name="Lucida Sans Regular" size="25.0" />
-               </font>
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.account.AddNewAccountController">
+    <VBox prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: transparent;">
+        <Label alignment="CENTER" text="Lägg till nytt konto" textFill="#f35b1c">
+            <font>
+                <Font name="Lucida Sans Regular" size="25.0"/>
+            </font>
+        </Label>
+        <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </Line>
+        <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <Label text="Skriv in kontonummer">
+                <font>
+                    <Font name="Lucida Sans Regular" size="14.0"/>
+                </font>
             </Label>
-            <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin></Line>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Label text="Skriv in kontonummer">
-                     <font>
-                        <Font name="Lucida Sans Regular" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="newAccountNr" />
-                  <Label text="Ange kontonamn">
-                     <font>
-                        <Font name="Lucida Sans Regular" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="newAccountName" />
-                  <HBox prefHeight="26.0" prefWidth="360.0" spacing="10.0">
-                     <children>
-                        <Button onAction="#cancelChange" mnemonicParsing="false" text="Avbryt" />
-                        <Button onAction="#addAccount" mnemonicParsing="false" text="Spara" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
-   </content>
+            <TextField fx:id="newAccountNr"/>
+            <Label text="Ange kontonamn">
+                <font>
+                    <Font name="Lucida Sans Regular" size="14.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="newAccountName"/>
+            <HBox prefHeight="26.0" prefWidth="360.0" spacing="10.0">
+                <Button mnemonicParsing="false" onAction="#cancelChange" text="Avbryt"/>
+                <Button mnemonicParsing="false" onAction="#addAccount" text="Spara"/>
+            </HBox>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+        </VBox>
+    </VBox>
 </ScrollPane>

@@ -11,44 +11,36 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" stylesheets="@transactionStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.transaction.StartAutogiroController">
-   <children>
-      <VBox prefHeight="346.0" prefWidth="398.0" style="-fx-background-color: #F9F8F6;">
-         <children>
-            <Label fx:id="accountName" alignment="CENTER" text="Starta autogiro" textFill="#f35b1c">
-               <font>
-                  <Font name="Lucida Sans Regular" size="25.0" />
-               </font>
-            </Label>
-            <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin>
-            </Line>
-            <VBox prefHeight="290.0" prefWidth="398.0" spacing="10.0">
-               <children>
-                  <Label text="Från konto" />
-                  <ChoiceBox fx:id="accountFrom" prefWidth="150.0" />
-                  <Label text="Till konto" />
-                  <ChoiceBox fx:id="accountTo" prefWidth="150.0" />
-                  <Label text="Summa att betala per månad" />
-                  <TextField fx:id="savingsAmount" />
-                  <Label fx:id="errorLabel" />
-                  <HBox prefHeight="23.0" prefWidth="398.0" spacing="10.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#cancelChange" text="Avbryt" />
-                        <Button mnemonicParsing="false" onAction="#submitSaving" text="Spara" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
-   </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0"
+      prefWidth="400.0" style="-fx-background-color: transparent;" stylesheets="@transactionStyle.css"
+      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="app.transaction.StartAutogiroController">
+    <VBox prefHeight="346.0" prefWidth="398.0" style="-fx-background-color: transparent;">
+        <Label fx:id="accountName" alignment="CENTER" text="Starta autogiro" textFill="#f35b1c">
+            <font>
+                <Font name="Lucida Sans Regular" size="25.0"/>
+            </font>
+        </Label>
+        <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </Line>
+        <VBox prefHeight="290.0" prefWidth="398.0" spacing="10.0" style="-fx-background-color: transparent;">
+            <Label text="Från konto"/>
+            <ChoiceBox fx:id="accountFrom" prefWidth="150.0"/>
+            <Label text="Till konto"/>
+            <ChoiceBox fx:id="accountTo" prefWidth="150.0"/>
+            <Label text="Summa att betala per månad"/>
+            <TextField fx:id="savingsAmount"/>
+            <Label fx:id="errorLabel"/>
+            <HBox prefHeight="23.0" prefWidth="398.0" spacing="10.0">
+                <Button mnemonicParsing="false" onAction="#cancelChange" text="Avbryt"/>
+                <Button mnemonicParsing="false" onAction="#submitSaving" text="Spara"/>
+            </HBox>
+        </VBox>
+    </VBox>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+    </padding>
 </Pane>

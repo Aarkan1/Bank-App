@@ -1,5 +1,5 @@
 .titled-pane *.title, .homeButton {
-    -fx-background-color: transparent;
+    -fx-background-color: #FBF2EA;
 }
 .accordion .title > .arrow-button .arrow{
     -fx-background-color: transparent;

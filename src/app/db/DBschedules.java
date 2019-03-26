@@ -1,7 +1,5 @@
 package app.db;
 
-import app.login.LoginController;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -13,25 +11,25 @@ public class DBschedules {
     }
 
 
-    public void startScheduledTransfer(double amount, String fromAccount, String toAccount) {
-        String query =
-                "CREATE EVENT IF NOT EXISTS `" + LoginController.getUser().getId() + "_auto_saving` ON SCHEDULE EVERY 1 MONTH STARTS CURRENT_TIMESTAMP ON COMPLETION PRESERVE ENABLE DO CALL transfer_money(?, 'MONTHLY SAVING', ?, ?);";
+    public void startAutogiro(double amount, String fromAccount, String toAccount) {
 
-        PreparedStatement ps = DB.prep(query);
+        PreparedStatement ps = DB.prep("INSERT INTO autogiro SET `account_from` = ?, `account_to` = ?, `amount` = ?");
 
         try {
-            ps.setDouble(1, amount);
-            ps.setString(2, fromAccount);
-            ps.setString(3, toAccount);
+            ps.setString(1, fromAccount);
+            ps.setString(2, toAccount);
+            ps.setDouble(3, amount);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void removeSchedule(String userID) {
-        PreparedStatement ps = DB.prep("DROP EVENT IF EXISTS `" + userID + "_auto_saving`");
+    public void removeAutogiro(String targetAccount) {
+
+        PreparedStatement ps = DB.prep("DELETE FROM autogiro WHERE `account_from` = ? LIMIT 1");
         try {
+            ps.setString(1, targetAccount);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

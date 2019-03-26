@@ -7,34 +7,56 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="360.0" style="-fx-background-color: transparent;" stylesheets="@../accountStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.account.accountSettings.ChangeTypeSettingsController">
+<ScrollPane fx:controller="app.account.accountSettings.ChangeTypeSettingsController" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: transparent;" stylesheets="@../accountStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <content>
-      <VBox fx:id="changeNameSettings" prefHeight="255.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #F9F8F6;">
+      <VBox prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: #F9F8F6;">
          <children>
-            <Label alignment="CENTER" text="Byta kontotyp">
+            <Label alignment="CENTER" text="Konto inställningar" textFill="#f35b1c">
                <font>
-                  <Font name="Lucida Sans Regular" size="20.0" />
+                  <Font name="Lucida Sans Regular" size="25.0" />
                </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
             </Label>
-            <Label text="Välj konto" />
-            <ChoiceBox fx:id="chooseAccount" prefWidth="150.0" />
-            <Label text="Välj ny kontotyp" />
-            <ChoiceBox fx:id="chooseType" prefWidth="150.0" />
-            <Label fx:id="errorMessage" textFill="RED" />
-            <HBox prefHeight="28.0" prefWidth="350.0" spacing="10.0">
-               <children>
-                  <Button onAction="#cancelChange" mnemonicParsing="false" text="Avbryt" />
-                  <Button onAction="#submitChange" mnemonicParsing="false" text="Spara" />
-               </children>
-            </HBox>
+            <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Line>
+            <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="360.0" style="-fx-background-color: transparent;" stylesheets="@../accountStyle.css" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="changeNameSettings" prefHeight="255.0" prefWidth="360.0" spacing="10.0" style="-fx-background-color: #F9F8F6;">
+                     <children>
+                        <Label alignment="CENTER" text="Byta kontotyp">
+                           <font>
+                              <Font name="Lucida Sans Regular" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Välj konto" />
+                        <ChoiceBox fx:id="chooseAccount" prefWidth="150.0" />
+                        <Label text="Välj ny kontotyp" />
+                        <ChoiceBox fx:id="chooseType" prefWidth="150.0" />
+                        <Label fx:id="errorMessage" textFill="RED" />
+                        <HBox prefHeight="28.0" prefWidth="350.0" spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#cancelChange" text="Avbryt" />
+                              <Button mnemonicParsing="false" onAction="#submitChange" text="Spara" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </children>
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
    </content>

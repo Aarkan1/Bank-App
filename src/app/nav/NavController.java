@@ -1,7 +1,6 @@
 package app.nav;
 
 import app.Entities.CT;
-import app.account.accountSettings.AccountSettingsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +9,6 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 public class NavController {
-    AccountSettingsController accountSettingsController;
 
     @FXML
     public void loadHome() {
@@ -23,13 +21,21 @@ public class NavController {
     }
 
     @FXML
+    void loadStartSavings() {
+        changeHomeCenter("/app/transaction/startMonthlySaving.fxml");
+    }
+
+    @FXML
+    void loadAddAccount() {
+        changeHomeCenter("/app/account/addNewAccount.fxml");
+    }
+
+    @FXML
     void loadAccountSettings() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/account/accountSettings/accountSettings.fxml"));
             Parent fxmlInstance = loader.load();
             Scene scene = new Scene(fxmlInstance);
-
-            accountSettingsController = loader.getController();
 
             CT.homeController.setCenter(scene);
         } catch (IOException e) {
@@ -52,12 +58,14 @@ public class NavController {
     }
 
     <T> T loadAccountSettingsController(String fxmlRoute) {
+        loadAccountSettings();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlRoute));
             Parent fxmlInstance = loader.load();
             Scene scene = new Scene(fxmlInstance);
 
-            accountSettingsController.setAccountSettings(scene);
+            CT.homeController.setCenter(scene);
+
             return loader.getController();
 
         } catch (IOException e) {
@@ -72,22 +80,22 @@ public class NavController {
 
     @FXML
     public void changeNameSettingsScreen() {
-        CT.setChangeNameSettingsController(loadAccountSettingsController("/app/account/accountSettings/changeNameSettings.fxml"));
+        changeHomeCenter("/app/account/accountSettings/changeNameSettings.fxml");
     }
 
     @FXML
     public void changeTypeSettingsScreen() {
-        CT.setChangeTypeSettingsController(loadAccountSettingsController("/app/account/accountSettings/changeTypeSettings.fxml"));
+        changeHomeCenter("/app/account/accountSettings/changeTypeSettings.fxml");
     }
 
     @FXML
     public void createNewSettingsScreen() {
-        CT.setCreateNewSettingsController(loadAccountSettingsController("/app/account/accountSettings/createNewSettings.fxml"));
+        changeHomeCenter("/app/account/accountSettings/createNewSettings.fxml");
     }
 
     @FXML
     public void deleteSettingsScreen() {
-        CT.setDeleteSettingsController(loadAccountSettingsController("/app/account/accountSettings/deleteSettings.fxml"));
+        changeHomeCenter("/app/account/accountSettings/deleteSettings.fxml");
     }
 
 }

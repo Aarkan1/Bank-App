@@ -1,8 +1,5 @@
 package app.db;
 
-import app.Entities.Account;
-import app.Entities.CT;
-import app.account.AllAccountController;
 import app.login.LoginController;
 
 import java.sql.PreparedStatement;
@@ -95,7 +92,7 @@ public class DBhelper {
     }
    public void addNewAccount(String targetAccount, String accountName) {
 
-        PreparedStatement ps = DB.prep("INSERT INTO userXaccounts SET user_person_nr = ?, account_nr = ?, `name` = ?");
+        PreparedStatement ps = DB.prep("INSERT INTO userXaccounts SET userXaccounts.`user_person_nr` = ?, userXaccounts.`account_nr` = ?, userXaccounts.`name` = ?");
 
         try {
             ps.setString(1, LoginController.getUser().getId());
@@ -105,20 +102,5 @@ public class DBhelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    void changeSalaryAccount(String type) {
-        CT.accounts.forEach(a -> {
-            if (a.getType().equals(type))
-                changeAccountType(a.getAccountNr(), "savings");
-        });
-    }
-
-    boolean checkAccountType(String targetAccount, String type) {
-        for (Account a : CT.accounts) {
-            if (a.getAccountNr().equals(targetAccount) && a.getType().equals(type))
-                return true;
-        }
-        return false;
     }
 }

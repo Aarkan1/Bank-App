@@ -34,8 +34,8 @@ public abstract class DB {
         DBhelper.getDBhelper().addNewAccount(targetAccount, accountName);
     }
 
-    public static void startScheduledTransfer(double amount, String fromAccount, String toAccount){
-        DBschedules.getSingleton().startScheduledTransfer(amount,fromAccount,toAccount);
+    public static void startAutogiro(double amount, String fromAccount, String toAccount){
+        DBschedules.getSingleton().startAutogiro(amount,fromAccount,toAccount);
     }
 
     public static void deleteAccount(String targetAccount) {

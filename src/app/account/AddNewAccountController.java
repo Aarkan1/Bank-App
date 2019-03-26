@@ -9,7 +9,9 @@ import javafx.scene.control.TextField;
 
 public class AddNewAccountController {
 
+    @FXML
     TextField newAccountNr;
+    @FXML
     TextField newAccountName;
 
     @FXML
@@ -17,6 +19,7 @@ public class AddNewAccountController {
 
     }
 
+    @FXML
     void addAccount() {
 
 //        don't add
@@ -33,8 +36,16 @@ public class AddNewAccountController {
             }
         }
 
-        DB.addNewAccount(newAccountName.getText(), newAccountNr.getText());
+        DB.addNewAccount(newAccountNr.getText(), newAccountName.getText());
+        CT.navController.loadHome();
     }
+
+
+    @FXML
+    void cancelChange() {
+        CT.navController.loadHome();
+    }
+
 
 
 }

@@ -23,55 +23,38 @@
                 <Accordion fx:id="navAccordionMenu" prefHeight="322.0" prefWidth="149.0">
                     <panes>
                         <TitledPane animated="false" prefHeight="200.0" prefWidth="149.0" text="Konton och kort">
-                            <content>
-                                <VBox prefHeight="179.0" prefWidth="147.0">
-                                    <children>
-                                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Översikt">
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
-                                        <Accordion prefHeight="146.0" prefWidth="127.0">
-                                            <panes>
-                                                <TitledPane animated="false" onMouseClicked="#loadAccountSettings" prefHeight="137.0" prefWidth="127.0" text="Inställningar">
-                                                    <content>
-                                                        <VBox prefHeight="200.0" prefWidth="125.0" style="-fx-background-color: transparent;">
-                                                            <children>
-                                                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeNameSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Byta kontonamn">
-                                                                    <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                    </cursor>
-                                                                </Button>
-                                                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeTypeSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Byta kontotyp">
-                                                                    <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                    </cursor>
-                                                                </Button>
-                                                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#createNewSettingsScreen" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: transparent;" text="Skapa konto">
-                                                                    <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                    </cursor>
-                                                                </Button>
-                                                                <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#deleteSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Ta bort konto">
-                                                                    <cursor>
-                                                                        <Cursor fx:constant="HAND" />
-                                                                    </cursor>
-                                                                </Button>
-                                                            </children>
-                                                        </VBox>
-                                                    </content>
-                                                </TitledPane>
-                                            </panes>
-                                        </Accordion>
-                                    </children>
-                                </VBox>
-                            </content>
+                     <content>
+                                      <VBox prefHeight="200.0" prefWidth="125.0" style="-fx-background-color: transparent;">
+                                          <children>
+                                              <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeNameSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Byta kontonamn">
+                                                  <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                  </cursor>
+                                              </Button>
+                                              <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeTypeSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Byta kontotyp">
+                                                  <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                  </cursor>
+                                              </Button>
+                                              <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#createNewSettingsScreen" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: transparent;" text="Skapa konto">
+                                                  <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                  </cursor>
+                                              </Button>
+                                              <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#deleteSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Ta bort konto">
+                                                  <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                  </cursor>
+                                              </Button>
+                                          </children>
+                                      </VBox>
+                     </content>
                         </TitledPane>
                         <TitledPane animated="false" text="Betala och överföra">
                             <content>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="27.0" prefWidth="131.0" style="-fx-background-color: transparent;" text="Framtida betalningar">
+                                        <Button onAction="#loadAddAccount" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Lägg till konto">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
@@ -91,11 +74,11 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Button>
-                                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Inställningar">
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
+                              <Button onAction="#loadStartSavings" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Starta sparplan">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
                                     </children>
                                 </VBox>
                             </content>

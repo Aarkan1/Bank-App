@@ -64,11 +64,6 @@
                                                 <Cursor fx:constant="HAND" />
                                             </cursor>
                                         </Button>
-                                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Bankgiro/Plusgiro">
-                                            <cursor>
-                                                <Cursor fx:constant="HAND" />
-                                            </cursor>
-                                        </Button>
                                         <Button onAction="#loadAutogiro" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Autogiro">
                                             <cursor>
                                                 <Cursor fx:constant="HAND" />

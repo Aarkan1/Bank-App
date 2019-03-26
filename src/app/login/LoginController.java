@@ -61,7 +61,7 @@ public class LoginController {
 
             CT.setHomeController(loader.getController());
 
-            Scene scene = new Scene(fxmlHome, 700, 500);
+            Scene scene = new Scene(fxmlHome, 1000, 500);
             Main.stage.setScene(scene);
             Main.stage.show();
         } catch (IOException e1) {

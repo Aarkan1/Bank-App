@@ -71,12 +71,13 @@ public class DisplayTransactionsController {
 
             tc.setTransaction(transaction);
 
-            tc.amount.setTextFill(transaction.isIncome(this.account.getAccountNr()) ? Color.GREEN : Color.RED);
-
-            if (transaction.isIncome(this.account.getAccountNr()))
+            if (transaction.isIncome(this.account.getAccountNr())) {
+                tc.amount.setTextFill(Color.GREEN);
                 tc.amount.setText("+" + tc.amount.getText());
-            else
+            } else {
+                tc.amount.setTextFill(Color.RED);
                 tc.amount.setText("-" + tc.amount.getText());
+            }
 
             allTransactions.getChildren().add(scene.getRoot());
         } catch (IOException e) {

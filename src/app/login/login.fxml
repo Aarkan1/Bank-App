@@ -54,7 +54,10 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin></Label>
-            <Button mnemonicParsing="false" onAction="#login" text="Logga in" />
+            <Button mnemonicParsing="false" onAction="#login" text="Logga in">
+               <font>
+                  <Font name="Lucida Sans Regular" size="14.0" />
+               </font></Button>
          </children>
       </VBox>
    </children>

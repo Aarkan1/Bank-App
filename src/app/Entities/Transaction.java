@@ -25,6 +25,10 @@ public class Transaction {
         return accountFrom.equals(account) ? false : true;
     }
 
+    public String getAccountFrom() {
+        return accountFrom;
+    }
+
     public String getMessage() {
         return message;
     }

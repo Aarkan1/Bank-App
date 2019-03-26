@@ -35,6 +35,21 @@ public class HomeController {
 //        DB.cardPay(1111222233334444L, 852147483647L, 20.5f);
     }
 
+    @FXML
+    void logout() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/login/login.fxml"));
+        Parent fxmlLogin = null;
+        try {
+            fxmlLogin = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Scene scene = new Scene(fxmlLogin);
+
+        Main.stage.setScene(scene);
+        Main.stage.show();
+    }
+
     void loadNavbar() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/nav/nav.fxml"));
         Parent fxmlNav = null;
@@ -62,13 +77,27 @@ public class HomeController {
         Scene scene = new Scene(fxmlAccounts);
 
         CT.setAllAccountController(loader.getController());
-
         setCenter(scene);
+
+        loadLastTransactions();
     }
 
     public void setCenter(Scene scene) {
         homePane.setCenter(scene.getRoot());
         BorderPane.setAlignment(homePane.getCenter(), Pos.TOP_CENTER);
+    }
 
+    public void loadLastTransactions() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/transaction/displayLastTransactions.fxml"));
+        Parent fxmlLastTransactions = null;
+        try {
+            fxmlLastTransactions = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scene scene = new Scene(fxmlLastTransactions);
+
+        homePane.setRight(scene.getRoot());
     }
 }

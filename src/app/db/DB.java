@@ -33,6 +33,9 @@ public abstract class DB {
     public static void addNewAccount(String targetAccount, String accountName) {
         DBhelper.getDBhelper().addNewAccount(targetAccount, accountName);
     }
+   public static List<Transaction> getLastTransactions(String userID) {
+        return DBhelper.getDBhelper().getLastTransactions(userID);
+    }
 
     public static void startAutogiro(double amount, String fromAccount, String toAccount){
         DBschedules.getSingleton().startAutogiro(amount,fromAccount,toAccount);

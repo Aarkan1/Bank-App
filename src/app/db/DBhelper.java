@@ -1,9 +1,11 @@
 package app.db;
 
+import app.Entities.Transaction;
 import app.login.LoginController;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class DBhelper {
     private static DBhelper singleton = new DBhelper();
@@ -90,7 +92,8 @@ public class DBhelper {
             e.printStackTrace();
         }
     }
-   public void addNewAccount(String targetAccount, String accountName) {
+
+    public void addNewAccount(String targetAccount, String accountName) {
 
         PreparedStatement ps = DB.prep("INSERT INTO userXaccounts SET userXaccounts.`user_person_nr` = ?, userXaccounts.`account_nr` = ?, userXaccounts.`name` = ?");
 
@@ -102,5 +105,18 @@ public class DBhelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Transaction> getLastTransactions(String userID) {
+
+        List<Transaction> result = null;
+        PreparedStatement ps = DB.prep("CALL get_last_transactions(?)");
+        try {
+            ps.setString(1, userID);
+            result = (List<Transaction>) new ObjectMapper<>(Transaction.class).map(ps.executeQuery());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result; // return Transactions;
     }
 }

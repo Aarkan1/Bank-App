@@ -17,18 +17,18 @@ public class NewTransactionController {
     @FXML
     VBox payMethods;
 
-    ChoiceBox<Account> accountFrom = new ChoiceBox<>();
-    ChoiceBox<Account> accountTo = new ChoiceBox<>();
-    TextField amountField = new TextField();
-    TextField messageField = new TextField();
-    Label errorLabel = new Label();
+    private ChoiceBox<Account> accountFrom = new ChoiceBox<>();
+    private ChoiceBox<Account> accountTo = new ChoiceBox<>();
+    private TextField amountField = new TextField();
+    private TextField messageField = new TextField();
+    private Label errorLabel = new Label();
 
     @FXML
     private void initialize() {
         initTransactionBoxes();
     }
 
-    void initTransactionBoxes() {
+    private void initTransactionBoxes() {
         Label fromLabel = new Label("Från");
         Label toLabel = new Label("Till");
         Label amountLabel = new Label("Belopp");
@@ -39,18 +39,6 @@ public class NewTransactionController {
         fillAccountBoxes();
         nodeSettings();
 
-        HBox buttonsHBox = new HBox();
-        Button cancelButton = new Button("Avbryt");
-        cancelButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> CT.navController.loadHome());
-
-        Button submitButton = new Button("Spara");
-        submitButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) ->
-                moveMoneyBetweenAccounts(accountFrom.getValue().getAccountNr(), accountTo.getValue().getAccountNr(), amountField.getText(), messageField.getText()));
-
-        buttonsHBox.getChildren().addAll(cancelButton, submitButton);
-        buttonsHBox.setSpacing(10);
-        buttonsHBox.setAlignment(Pos.CENTER_RIGHT);
-
         payMethods.getChildren().addAll(
                 fromLabel,
                 accountFrom,
@@ -60,15 +48,29 @@ public class NewTransactionController {
                 amountField,
                 messageLabel,
                 messageField,
-                errorLabel,
-                buttonsHBox);
+                errorLabel);
+
+        addButtons();
     }
 
-    void fillAccountBoxes() {
+    private void addButtons() {
+        HBox buttonsHBox = new HBox();
+        Button cancelButton = new Button("Avbryt");
+        cancelButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> CT.navController.loadHome());
+
+        Button submitButton = new Button("Spara");
+        submitButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) ->
+                moveMoneyBetweenAccounts(accountFrom.getValue(), accountTo.getValue(), amountField.getText(), messageField.getText()));
+
+        buttonsHBox.getChildren().addAll(cancelButton, submitButton);
+        buttonsHBox.setSpacing(10);
+        buttonsHBox.setAlignment(Pos.CENTER_RIGHT);
+
+        payMethods.getChildren().add(buttonsHBox);
+    }
+
+    private void fillAccountBoxes() {
         for (Account account : CT.accounts) {
-
-//            String itemText = String.format("%s\t\t%2.2f", account.getAccountNr(), account.getSaldo());
-
             accountFrom.getItems().add(account);
             accountTo.getItems().add(account);
         }
@@ -79,16 +81,13 @@ public class NewTransactionController {
         addedAccounts();
     }
 
-    void addedAccounts(){
+    private void addedAccounts() {
         for (Account account : CT.addedAccounts) {
-
-            String itemText = String.format("%s", account.getName());
-
             accountTo.getItems().add(account);
         }
     }
 
-    void nodeSettings() {
+    private void nodeSettings() {
         payMethods.setAlignment(Pos.TOP_LEFT);
         payMethods.setSpacing(5);
 
@@ -100,7 +99,9 @@ public class NewTransactionController {
         accountTo.getSelectionModel().selectLast();
     }
 
-    void moveMoneyBetweenAccounts(String from, String to, String amount, String message) {
+    private void moveMoneyBetweenAccounts(Account accFrom, Account accTo, String amount, String message) {
+
+        if (accTo.getName().equals("---------")) return;
 
         if (!amount.matches("^[\\d]+$")) {
             errorLabel.setTextFill(Color.RED);
@@ -108,19 +109,13 @@ public class NewTransactionController {
             return;
         }
 
-        String[] fromSplit = from.split("\t");
-        String[] toSplit = to.split("\t");
-
-//        long fromAcc = Long.parseLong(fromSplit[0]);
-        double fromSaldo = Double.parseDouble(fromSplit[fromSplit.length - 1].replace(",", "."));
-//        long toAcc = Long.parseLong(toSplit[0]);
         double inputAmount = Double.parseDouble(amount);
 
-        if (inputAmount > fromSaldo) {
+        if (inputAmount > accFrom.getSaldo()) {
             errorLabel.setTextFill(Color.RED);
             errorLabel.setText("Beloppet stämmer inte");
         } else {
-            DB.moveMoneyBetweenAccounts(fromSplit[0], toSplit[0], inputAmount, message);
+            DB.moveMoneyBetweenAccounts(accFrom.getAccountNr(), accTo.getAccountNr(), inputAmount, message);
             CT.navController.loadHome();
         }
     }

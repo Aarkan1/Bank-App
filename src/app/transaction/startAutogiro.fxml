@@ -33,6 +33,7 @@
                   <ChoiceBox fx:id="accountTo" prefWidth="150.0" />
                   <Label text="Summa att betala per månad" />
                   <TextField fx:id="savingsAmount" />
+                  <Label fx:id="errorLabel" />
                   <HBox prefHeight="23.0" prefWidth="398.0" spacing="10.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#cancelChange" text="Avbryt" />

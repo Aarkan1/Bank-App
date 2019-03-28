@@ -3,6 +3,7 @@ package app.transaction;
 import app.Entities.Account;
 import app.Entities.CT;
 import app.db.DB;
+import app.nav.NV;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -70,13 +71,13 @@ public class StartAutogiroController {
         } else {
 
             DB.startAutogiro(inputAmount, accountFrom.getValue().getAccountNr(), accountTo.getValue().getAccountNr());
-            CT.navController.loadHome();
+            NV.get().loadHome();
         }
     }
 
     @FXML
     void cancelChange() {
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
 }

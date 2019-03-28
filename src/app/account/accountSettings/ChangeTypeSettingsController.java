@@ -3,6 +3,7 @@ package app.account.accountSettings;
 import app.Entities.Account;
 import app.Entities.CT;
 import app.db.DB;
+import app.nav.NV;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -23,7 +24,7 @@ public class ChangeTypeSettingsController {
         chooseType.getSelectionModel().selectFirst();
     }
 
-    void fillAccountBoxes() {
+    private void fillAccountBoxes() {
         for (Account account : CT.accounts) {
             chooseAccount.getItems().add(account);
         }
@@ -33,12 +34,12 @@ public class ChangeTypeSettingsController {
     @FXML
     void submitChange() {
         DB.changeAccountType(chooseAccount.getValue().getAccountNr(), CT.getAccountType(chooseType.getValue()));
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
     @FXML
     void cancelChange() {
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
 

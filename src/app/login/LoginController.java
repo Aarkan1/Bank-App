@@ -33,7 +33,6 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        System.out.println("initialize login");
         loginError.setTextFill(Color.RED);
     }
 
@@ -54,7 +53,7 @@ public class LoginController {
         }
     }
 
-    void switchScene(String pathname) {
+    private void switchScene(String pathname) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(pathname));
             Parent fxmlHome = loader.load();

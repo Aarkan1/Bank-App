@@ -8,84 +8,74 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="210.0" prefWidth="150.0" style="-fx-background-color: transparent;" stylesheets="@navStyle.css"
-            vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.nav.NavController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="236.0" prefWidth="150.0" style="-fx-background-color: transparent;" stylesheets="@navStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
     <VBox prefHeight="210.0" prefWidth="149.0" style="-fx-background-color: transparent;">
-        <Button fx:id="homeButton" alignment="TOP_LEFT" minWidth="-Infinity" mnemonicParsing="false"
-                onAction="#loadHome" prefHeight="25.0" prefWidth="148.0" styleClass="homeButton" text="Hem">
+        <Button fx:id="homeButton" alignment="TOP_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="25.0" prefWidth="148.0" styleClass="homeButton" text="Hem">
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
             <padding>
-                <Insets left="24.0" top="4.0"/>
+                <Insets left="24.0" top="4.0" />
             </padding>
         </Button>
-        <Accordion fx:id="navAccordionMenu" prefHeight="183.0" prefWidth="149.0"
-                   style="-fx-background-color: transparent;">
+        <Accordion fx:id="navAccordionMenu" prefHeight="183.0" prefWidth="149.0" style="-fx-background-color: transparent;">
             <panes>
                 <TitledPane animated="false" prefHeight="179.0" prefWidth="149.0" text="Konton och kort">
                     <VBox prefHeight="147.0" prefWidth="147.0" style="-fx-background-color: transparent;">
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeNameSettingsScreen"
-                                prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;"
-                                text="Byta kontonamn">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeNameSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Byta kontonamn">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeTypeSettingsScreen"
-                                prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;"
-                                text="Byta kontotyp">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#changeTypeSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Byta kontotyp">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#createNewSettingsScreen"
-                                prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: transparent;"
-                                text="Skapa konto">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#createNewSettingsScreen" prefHeight="25.0" prefWidth="113.0" style="-fx-background-color: transparent;" text="Skapa konto">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#deleteSettingsScreen"
-                                prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;"
-                                text="Ta bort konto">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#deleteSettingsScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Ta bort konto">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
                     </VBox>
                 </TitledPane>
-                <TitledPane animated="false" prefHeight="158.0" prefWidth="149.0" text="Betala och överföra">
+                <TitledPane animated="false" prefHeight="192.0" prefWidth="149.0" text="Betala och överföra">
                     <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;">
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadAddAccount"
-                                prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;"
-                                text="Lägg till konto">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadAddAccount" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Lägg till konto">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadNewTransactions"
-                                prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;"
-                                text="Överföringar">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadNewTransactions" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Överföringar">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadAutogiro" prefHeight="25.0"
-                                prefWidth="126.0" style="-fx-background-color: transparent;" text="Autogiro">
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#cardPayScreen" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Ny kortbetalning">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadAutogiro" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Autogiro">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadStartSavings"
-                                prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;"
-                                text="Starta sparplan">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadStartSavings" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Starta sparplan">
                             <cursor>
-                                <Cursor fx:constant="HAND"/>
+                                <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#paySalary" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="( Betala lön )">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                     </VBox>
                 </TitledPane>
             </panes>

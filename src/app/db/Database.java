@@ -35,7 +35,6 @@ public class Database {
     }
 
     public CallableStatement cardPay(long cardNr, String targetAccount, double amount) {
-
         CallableStatement stmt = null;
         try {
             stmt = conn.prepareCall("{call card_pay(?, ?, ?)}");
@@ -48,16 +47,12 @@ public class Database {
         return stmt;
     }
 
-    public CallableStatement callableStatement(String procedure, String[] params) {
-
-        String param = String.join(", ", params);
-
-        System.out.println(param);
-
+    public CallableStatement paySalary(double amount, String userID) {
         CallableStatement stmt = null;
         try {
-            stmt = conn.prepareCall("{call " + procedure + "(" + param + ")}");
-//            stmt.setString(1, param);
+            stmt = conn.prepareCall("{call pay_salary(?, ?)}");
+            stmt.setDouble(1, amount);
+            stmt.setString(2, userID);
         } catch (SQLException e) {
             e.printStackTrace();
         }

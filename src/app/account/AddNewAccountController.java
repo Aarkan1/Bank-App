@@ -4,6 +4,7 @@ package app.account;
 import app.Entities.Account;
 import app.Entities.CT;
 import app.db.DB;
+import app.nav.NV;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
@@ -37,15 +38,14 @@ public class AddNewAccountController {
         }
 
         DB.addNewAccount(newAccountNr.getText(), newAccountName.getText());
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
 
     @FXML
     void cancelChange() {
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
-
 
 
 }

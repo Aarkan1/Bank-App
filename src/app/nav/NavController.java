@@ -1,18 +1,28 @@
 package app.nav;
 
 import app.Entities.CT;
+import app.db.DB;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
-import java.io.IOException;
 
 public class NavController {
 
     @FXML
+    void initialize() {
+    }
+
+    @FXML
     public void loadHome() {
-        CT.homeController.loadAllAccounts();
+        NV.get().loadHome();
+    }
+
+    private void changeHomeCenter(String fxmlRoute) {
+        CT.homeController.setCenter(NV.get().loadFXML(fxmlRoute));
+    }
+
+    @FXML
+    void paySalary() {
+        DB.paySalary(10000, "750312-3453");
+        loadHome();
     }
 
     @FXML
@@ -36,54 +46,6 @@ public class NavController {
     }
 
     @FXML
-    void loadAccountSettings() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/account/accountSettings/accountSettings.fxml"));
-            Parent fxmlInstance = loader.load();
-            Scene scene = new Scene(fxmlInstance);
-
-            CT.homeController.setCenter(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        changeNameSettingsScreen();
-    }
-
-    Scene loadFXML(String fxmlRoute) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlRoute));
-            Parent fxmlInstance = loader.load();
-            return new Scene(fxmlInstance);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    <T> T loadAccountSettingsController(String fxmlRoute) {
-        loadAccountSettings();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlRoute));
-            Parent fxmlInstance = loader.load();
-            Scene scene = new Scene(fxmlInstance);
-
-            CT.homeController.setCenter(scene);
-
-            return loader.getController();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    void changeHomeCenter(String fxmlRoute) {
-        CT.homeController.setCenter(loadFXML(fxmlRoute));
-    }
-
-    @FXML
     public void changeNameSettingsScreen() {
         changeHomeCenter("/app/account/accountSettings/changeNameSettings.fxml");
     }
@@ -101,6 +63,11 @@ public class NavController {
     @FXML
     public void deleteSettingsScreen() {
         changeHomeCenter("/app/account/accountSettings/deleteSettings.fxml");
+    }
+
+    @FXML
+    public void cardPayScreen() {
+        changeHomeCenter("/app/transaction/newCardTransaction.fxml");
     }
 
 }

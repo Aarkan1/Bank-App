@@ -42,9 +42,6 @@ public abstract class DB {
     public static void startAutogiro(double amount, String fromAccount, String toAccount) {
         DBschedules.getSingleton().startAutogiro(amount, fromAccount, toAccount);
     }
-//    public static void paySalary(double amount, String userID) {
-//        DBschedules.getSingleton().paySalary(amount, userID);
-//    }
 
     public static void deleteAccount(String targetAccount) {
         DBhelper.getDBhelper().deleteAccount(targetAccount);

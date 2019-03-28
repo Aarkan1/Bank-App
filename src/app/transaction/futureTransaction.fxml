@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="400.0" stylesheets="@transactionStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.transaction.FutureTransactionController">
+    <VBox prefHeight="346.0" prefWidth="398.0" style="-fx-background-color: #F9F8F6;">
+        <Label fx:id="accountName" alignment="CENTER" text="Bankgiro/Plusgiro" textFill="#f35b1c">
+            <font>
+                <Font name="Lucida Sans Regular" size="25.0" />
+            </font>
+        </Label>
+        <Line endX="250.0" endY="-1.8639612197875977" startX="-100.0" stroke="#d4c4bc">
+            <VBox.margin>
+                <Insets bottom="20.0" />
+            </VBox.margin>
+        </Line>
+        <VBox fx:id="payMethods" prefHeight="290.0" prefWidth="398.0" spacing="10.0">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <VBox prefHeight="52.0" prefWidth="212.0" spacing="10.0">
+                  <children>
+                        <Label text="Från konto" />
+                     <ChoiceBox fx:id="accountFrom" prefWidth="150.0" />
+                  </children>
+               </VBox>
+               <VBox prefHeight="52.0" prefWidth="177.0" spacing="10.0">
+                  <children>
+                     <Label text="Datum att betala" />
+                     <DatePicker fx:id="datePicker" />
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+            <Label text="Till konto" />
+            <ChoiceBox fx:id="accountTo" prefWidth="150.0" />
+            <Label text="Summa" />
+            <TextField fx:id="amount" />
+         <Label text="OCR" />
+         <TextField fx:id="ocrNr" />
+            <Label fx:id="errorMessage" />
+            <HBox prefHeight="24.0" prefWidth="388.0" spacing="10.0">
+                <Button mnemonicParsing="false" onAction="#cancelChange" text="Avbryt" />
+                <Button mnemonicParsing="false" onAction="#submitPayment" text="Spara" />
+            </HBox>
+        </VBox>
+    </VBox>
+</Pane>

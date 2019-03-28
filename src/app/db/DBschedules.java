@@ -2,6 +2,8 @@ package app.db;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class DBschedules {
     private static DBschedules singleton = new DBschedules();
@@ -36,14 +38,20 @@ public class DBschedules {
         }
     }
 
-    public void paySalary(double amount, String userID) {
-        PreparedStatement ps = DB.prep("CALL pay_salary(?, ?)");
+    public void futureTransaction(String message, double amount, String accountFrom, String accountTo, Timestamp timestamp){
+
+        PreparedStatement ps = DB.prep("INSERT INTO future_transactions SET `message` = ?,`amount` = ?, `account_from` = ?, `account_to` = ?, `date_to_send` = ?");
+
         try {
-            ps.setDouble(1, amount);
-            ps.setString(2, userID);
-            ps.executeQuery();
-        } catch (Exception e) {
+            ps.setString(1, message);
+            ps.setDouble(2, amount);
+            ps.setString(3, accountFrom);
+            ps.setString(4, accountTo);
+            ps.setTimestamp(5, timestamp);
+            ps.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 }

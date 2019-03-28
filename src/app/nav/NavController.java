@@ -31,6 +31,11 @@ public class NavController {
     }
 
     @FXML
+    void loadFutureTransactions() {
+        changeHomeCenter("/app/transaction/futureTransaction.fxml");
+    }
+
+    @FXML
     void loadStartSavings() {
         changeHomeCenter("/app/transaction/startMonthlySaving.fxml");
     }

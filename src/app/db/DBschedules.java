@@ -36,7 +36,14 @@ public class DBschedules {
         }
     }
 
-    public void paySalary(){
-
+    public void paySalary(double amount, String userID) {
+        PreparedStatement ps = DB.prep("CALL pay_salary(?, ?)");
+        try {
+            ps.setDouble(1, amount);
+            ps.setString(2, userID);
+            ps.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

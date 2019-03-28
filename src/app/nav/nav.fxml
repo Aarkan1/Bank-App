@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="150.0" style="-fx-background-color: transparent;" stylesheets="@navStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="236.0" prefWidth="150.0" style="-fx-background-color: transparent;" stylesheets="@navStyle.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.nav.NavController">
     <VBox prefHeight="210.0" prefWidth="149.0" style="-fx-background-color: transparent;">
         <Button fx:id="homeButton" alignment="TOP_LEFT" minWidth="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="25.0" prefWidth="148.0" styleClass="homeButton" text="Hem">
             <cursor>
@@ -44,7 +44,7 @@
                         </Button>
                     </VBox>
                 </TitledPane>
-                <TitledPane animated="false" prefHeight="158.0" prefWidth="149.0" text="Betala och överföra">
+                <TitledPane animated="false" prefHeight="192.0" prefWidth="149.0" text="Betala och överföra">
                     <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;">
                         <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#loadAddAccount" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="Lägg till konto">
                             <cursor>
@@ -71,6 +71,11 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#paySalary" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: transparent;" text="( Betala lön )">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                     </VBox>
                 </TitledPane>
             </panes>

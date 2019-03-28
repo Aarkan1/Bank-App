@@ -1,6 +1,7 @@
 package app.nav;
 
 import app.Entities.CT;
+import app.db.DB;
 import javafx.fxml.FXML;
 
 public class NavController {
@@ -16,6 +17,12 @@ public class NavController {
 
     private void changeHomeCenter(String fxmlRoute) {
         CT.homeController.setCenter(NV.get().loadFXML(fxmlRoute));
+    }
+
+    @FXML
+    void paySalary() {
+        DB.paySalary(10000, "750312-3453");
+        loadHome();
     }
 
     @FXML

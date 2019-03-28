@@ -42,6 +42,9 @@ public abstract class DB {
     public static void startAutogiro(double amount, String fromAccount, String toAccount) {
         DBschedules.getSingleton().startAutogiro(amount, fromAccount, toAccount);
     }
+//    public static void paySalary(double amount, String userID) {
+//        DBschedules.getSingleton().paySalary(amount, userID);
+//    }
 
     public static void deleteAccount(String targetAccount) {
         DBhelper.getDBhelper().deleteAccount(targetAccount);
@@ -107,6 +110,16 @@ public abstract class DB {
     public static void cardPay(long cardNr, String targetAccount, double amount) {
 
         CallableStatement cs = Database.getInstance().cardPay(cardNr, targetAccount, amount);
+
+        try {
+            cs.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void paySalary(double amount, String userID) {
+        CallableStatement cs = Database.getInstance().paySalary(amount,userID);
 
         try {
             cs.executeUpdate();

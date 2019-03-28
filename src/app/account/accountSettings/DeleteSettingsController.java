@@ -3,6 +3,7 @@ package app.account.accountSettings;
 import app.Entities.Account;
 import app.Entities.CT;
 import app.db.DB;
+import app.nav.NV;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -23,7 +24,7 @@ public class DeleteSettingsController {
         fillAccountBoxes();
     }
 
-    void fillAccountBoxes() {
+    private void fillAccountBoxes() {
         for (Account account : CT.accounts) {
             accountToDelete.getItems().add(account);
         }
@@ -39,12 +40,12 @@ public class DeleteSettingsController {
         }
 
         DB.deleteAccount(accountToDelete.getValue().getAccountNr());
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
     @FXML
     void cancelDelete() {
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
 }

@@ -3,6 +3,7 @@ package app.account.accountSettings;
 import app.Entities.Account;
 import app.Entities.CT;
 import app.db.DB;
+import app.nav.NV;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -42,12 +43,12 @@ public class ChangeNameSettingsController {
         }
 
         DB.changeAccountName(accountBox.getValue().getAccountNr(), newNameText);
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
     @FXML
     void cancelChange() {
-        CT.navController.loadHome();
+        NV.get().loadHome();
     }
 
 }

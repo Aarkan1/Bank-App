@@ -30,15 +30,17 @@ public abstract class DB {
     public static void changeAccountType(String targetAccount, String newType) {
         DBhelper.getDBhelper().changeAccountType(targetAccount, newType);
     }
+
     public static void addNewAccount(String targetAccount, String accountName) {
         DBhelper.getDBhelper().addNewAccount(targetAccount, accountName);
     }
-   public static List<Transaction> getLastTransactions(String userID) {
+
+    public static List<Transaction> getLastTransactions(String userID) {
         return DBhelper.getDBhelper().getLastTransactions(userID);
     }
 
-    public static void startAutogiro(double amount, String fromAccount, String toAccount){
-        DBschedules.getSingleton().startAutogiro(amount,fromAccount,toAccount);
+    public static void startAutogiro(double amount, String fromAccount, String toAccount) {
+        DBschedules.getSingleton().startAutogiro(amount, fromAccount, toAccount);
     }
 
     public static void deleteAccount(String targetAccount) {
@@ -47,10 +49,6 @@ public abstract class DB {
 
     public static PreparedStatement prep(String SQLQuery) {
         return Database.getInstance().prepareStatement(SQLQuery);
-    }
-
-    public static CallableStatement call(String procedure, String[] params) {
-        return Database.getInstance().callableStatement(procedure, params);
     }
 
     public static User getMatchingUser(String userID, String password) {
@@ -87,20 +85,16 @@ public abstract class DB {
     }
 
     public static List<Account> getAccounts(String userId) {
-        List<Account> result = null;
-        PreparedStatement ps = prep("SELECT * FROM accounts WHERE user_person_nr = ?");
-        try {
-            ps.setString(1, userId);
-            result = (List<Account>) new ObjectMapper<>(Account.class).map(ps.executeQuery());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result; // return Accounts;
+        return queryAccountList("SELECT * FROM accounts WHERE user_person_nr = ?", userId);
     }
 
     public static List<Account> getAddedAccounts(String userId) {
+        return queryAccountList("SELECT * FROM addedaccounts WHERE user_person_nr = ?", userId);
+    }
+
+    private static List<Account> queryAccountList(String SQLquery, String userId) {
         List<Account> result = null;
-        PreparedStatement ps = prep("SELECT * FROM addedaccounts WHERE user_person_nr = ?");
+        PreparedStatement ps = prep(SQLquery);
         try {
             ps.setString(1, userId);
             result = (List<Account>) new ObjectMapper<>(Account.class).map(ps.executeQuery());

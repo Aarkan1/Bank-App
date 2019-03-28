@@ -35,4 +35,8 @@ public class DBschedules {
             e.printStackTrace();
         }
     }
+
+    public void paySalary(){
+
+    }
 }

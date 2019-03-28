@@ -3,6 +3,7 @@ package app.transaction;
 import app.Entities.Account;
 import app.Entities.CT;
 import app.db.DB;
+import app.nav.NV;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -56,7 +57,7 @@ public class NewTransactionController {
     private void addButtons() {
         HBox buttonsHBox = new HBox();
         Button cancelButton = new Button("Avbryt");
-        cancelButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> CT.navController.loadHome());
+        cancelButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> NV.get().loadHome());
 
         Button submitButton = new Button("Spara");
         submitButton.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) ->
@@ -116,7 +117,7 @@ public class NewTransactionController {
             errorLabel.setText("Beloppet stämmer inte");
         } else {
             DB.moveMoneyBetweenAccounts(accFrom.getAccountNr(), accTo.getAccountNr(), inputAmount, message);
-            CT.navController.loadHome();
+            NV.get().loadHome();
         }
     }
 }

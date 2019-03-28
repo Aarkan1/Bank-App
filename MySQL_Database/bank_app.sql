@@ -31,14 +31,14 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Dumping data for table bank_app.accounts: ~8 rows (approximately)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
 INSERT INTO `accounts` (`account_nr`, `user_person_nr`, `name`, `type`, `saldo`) VALUES
-	('111222333444', '690102-1155', 'superkonto', 'savings', 959800),
+	('111222333444', '690102-1155', 'superkonto', 'savings', 939750),
 	('1133-4455', '690102-1155', 'Phone-Bill', 'billings', 0),
-	('852116070843', '750312-3453', 'Test-konto', 'savings', 45),
-	('852132761968', '881102-4492', 'Lönekonto', 'salary-account', 19647),
-	('852137761968', '881102-4492', 'Spar-konto', 'savings', 20462),
-	('852142482441', '881102-4492', 'TESTA', 'savings', 35),
-	('852142483447', '750312-3453', 'Kort-konto', 'card-account', 3980.5),
-	('852147483647', '750312-3453', 'Lönkonto', 'salary-account', 18394.5);
+	('852116070843', '750312-3453', 'Test-konto', 'savings', 13),
+	('852132761968', '881102-4492', 'Lönekonto', 'salary-account', 19649),
+	('852137761968', '881102-4492', 'Spar-konto', 'savings', 20451),
+	('852142482441', '881102-4492', 'TESTA', 'savings', 155),
+	('852142483447', '750312-3453', 'Kort-konto', 'card-account', 4021.5),
+	('852147483647', '750312-3453', 'Lönkonto', 'salary-account', 38324.5);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Dumping structure for view bank_app.addedaccounts
@@ -135,17 +135,50 @@ CREATE TABLE IF NOT EXISTS `future_transactions` (
   `account_from` varchar(50) NOT NULL,
   `account_to` varchar(50) NOT NULL,
   `date_to_send` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `FK_future_transactions_accounts` (`account_from`),
+  KEY `FK_future_transactions_accounts_2` (`account_to`),
+  CONSTRAINT `FK_future_transactions_accounts` FOREIGN KEY (`account_from`) REFERENCES `accounts` (`account_nr`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_future_transactions_accounts_2` FOREIGN KEY (`account_to`) REFERENCES `accounts` (`account_nr`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Dumping data for table bank_app.future_transactions: ~0 rows (approximately)
+-- Dumping data for table bank_app.future_transactions: ~2 rows (approximately)
 /*!40000 ALTER TABLE `future_transactions` DISABLE KEYS */;
+INSERT INTO `future_transactions` (`id`, `message`, `amount`, `account_from`, `account_to`, `date_to_send`) VALUES
+	(5, 'f transsaction', 1, '852137761968', '852142482441', '2019-03-28 23:00:00'),
+	(6, 'Framtida betalning', 110, '852147483647', '1133-4455', '2019-04-01 22:00:00');
 /*!40000 ALTER TABLE `future_transactions` ENABLE KEYS */;
 
 -- Dumping structure for event bank_app.future_transactions_payment
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` EVENT `future_transactions_payment` ON SCHEDULE EVERY 1 DAY STARTS '2019-03-26 00:00:10' ON COMPLETION PRESERVE ENABLE DO BEGIN
+CREATE DEFINER=`root`@`localhost` EVENT `future_transactions_payment` ON SCHEDULE EVERY 1 DAY STARTS '2019-03-28 00:00:10' ON COMPLETION PRESERVE ENABLE DO BEGIN
+DECLARE n INT DEFAULT 0;
+DECLARE i INT DEFAULT 0;
 
+DECLARE from_acc VARCHAR(50);
+DECLARE to_acc VARCHAR(50);
+DECLARE c_message VARCHAR(50);
+DECLARE a_amount DOUBLE;
+DECLARE d_id INT;
+DECLARE c_time TIMESTAMP;
+SELECT COUNT(*) FROM future_transactions INTO n;
+SET i = 0;
+WHILE i < n DO
+	SET c_time = (SELECT f.date_to_send FROM future_transactions f LIMIT 1 OFFSET i);
+
+	IF c_time <= CURRENT_TIMESTAMP THEN
+		SET from_acc = (SELECT f.account_from FROM future_transactions f LIMIT 1 OFFSET i);
+		SET to_acc = (SELECT f.account_to FROM future_transactions f LIMIT 1 OFFSET i);
+		SET a_amount = (SELECT f.amount FROM future_transactions f LIMIT 1 OFFSET i);
+		SET d_id = (SELECT f.id FROM future_transactions f LIMIT 1 OFFSET i);
+		SET c_message = (SELECT f.message FROM future_transactions f LIMIT 1 OFFSET i);
+
+		CALL transfer_money(a_amount, c_message, from_acc, to_acc);
+		DELETE FROM future_transactions WHERE id = d_id LIMIT 1;
+	ELSE
+		SET i = i + 1;
+	END IF;
+END WHILE;
 END//
 DELIMITER ;
 
@@ -184,14 +217,16 @@ DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pay_salary`(
 	IN `p_amount` DOUBLE,
 	IN `p_to_user` VARCHAR(50)
+
+
 )
 BEGIN
 DECLARE p_to BIGINT;
 DECLARE p_from BIGINT;
-DECLARE message VARCHAR(1000);
+DECLARE message VARCHAR(50);
 
 SET p_to = (SELECT account_nr FROM accounts WHERE user_person_nr = p_to_user AND `type` = 'salary-account' LIMIT 1);
-SET p_from = (SELECT account_nr FROM accounts WHERE user_person_nr = 6901021155 AND `type` = 'savings' LIMIT 1);
+SET p_from = (SELECT account_nr FROM accounts WHERE user_person_nr = '690102-1155' AND `type` = 'savings' LIMIT 1);
 
 SET message = 'SALARY';
 
@@ -209,9 +244,9 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `account_to` varchar(50) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
 
--- Dumping data for table bank_app.transactions: ~102 rows (approximately)
+-- Dumping data for table bank_app.transactions: ~110 rows (approximately)
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
 INSERT INTO `transactions` (`id`, `message`, `amount`, `account_from`, `account_to`, `date`) VALUES
 	(1, 'SALARY', 20000, '111222333444', '852147483647', '2019-03-19 14:39:53'),
@@ -315,7 +350,15 @@ INSERT INTO `transactions` (`id`, `message`, `amount`, `account_from`, `account_
 	(99, 'sista försöket', 1, '852121520227', '852116070843', '2019-03-26 14:19:39'),
 	(100, 'skoja', 1, '852121520227', '852116070843', '2019-03-26 14:21:40'),
 	(101, 'test', 123, '852132761968', '852137761968', '2019-03-26 14:33:47'),
-	(102, 'f3e', 12, '852116070843', '852137761968', '2019-03-26 15:41:01');
+	(102, 'f3e', 12, '852116070843', '852137761968', '2019-03-26 15:41:01'),
+	(103, 'CARD PAYMENT', 10, '852142483447', '852116070843', '2019-03-28 10:22:41'),
+	(104, 'ok', 11, '852116070843', '852142483447', '2019-03-28 11:20:03'),
+	(105, 'to much', 40, '852116070843', '852142483447', '2019-03-28 11:22:08'),
+	(106, 'SALARY', 50, '111222333444', '852147483647', '2019-03-28 11:24:31'),
+	(107, 'SALARY', 20000, '111222333444', '852147483647', '2019-03-28 11:24:49'),
+	(108, 'f test', 2, '852116070843', '852132761968', '2019-03-28 13:37:07'),
+	(109, 'f test igen', 11, '852137761968', '852116070843', '2019-03-28 13:39:25'),
+	(110, 'ABC123', 120, '852147483647', '852142482441', '2019-03-28 14:37:04');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 
 -- Dumping structure for procedure bank_app.transfer_money
@@ -379,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `userXaccounts` (
 -- Dumping data for table bank_app.userXaccounts: ~3 rows (approximately)
 /*!40000 ALTER TABLE `userXaccounts` DISABLE KEYS */;
 INSERT INTO `userXaccounts` (`id`, `user_person_nr`, `account_nr`, `name`) VALUES
-	(3, '750312-3453', '852137761968', 'Annas-konto'),
+	(3, '750312-3453', '852132761968', 'Annas-konto'),
 	(4, '750312-3453', '852142482441', 'Annas test account'),
 	(8, '750312-3453', '1133-4455', 'Mobil-räkning');
 /*!40000 ALTER TABLE `userXaccounts` ENABLE KEYS */;

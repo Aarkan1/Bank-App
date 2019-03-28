@@ -7,6 +7,7 @@ import app.Entities.User;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -41,6 +42,10 @@ public abstract class DB {
 
     public static void startAutogiro(double amount, String fromAccount, String toAccount) {
         DBschedules.getSingleton().startAutogiro(amount, fromAccount, toAccount);
+    }
+
+    public static void futureTransaction(String message, double amount, String accountFrom, String accountTo, Timestamp timestamp) {
+        DBschedules.getSingleton().futureTransaction(message, amount, accountFrom, accountTo, timestamp);
     }
 
     public static void deleteAccount(String targetAccount) {
@@ -115,8 +120,9 @@ public abstract class DB {
         }
 
     }
+
     public static void paySalary(double amount, String userID) {
-        CallableStatement cs = Database.getInstance().paySalary(amount,userID);
+        CallableStatement cs = Database.getInstance().paySalary(amount, userID);
 
         try {
             cs.executeUpdate();
